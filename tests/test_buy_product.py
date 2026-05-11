@@ -34,6 +34,7 @@ def test_buy_product_imac(set_up):
     apartment = 456
     op = OrderPage(driver)
     op.input_information(full_name=f.name(), email=f.email(), phone_number=f.phone_number())
+    """Add Delivery"""
     op.input_delivery_information(city_address=city_address,entrance=entrance,floor=floor,apartment=apartment)
     op.checkout_information()
 
