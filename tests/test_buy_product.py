@@ -56,8 +56,9 @@ def test_buy_product_marshall(set_up):
     cp = CartPage(driver)
     cp.select_order()
 
-    """No delivery"""
+
     f = Faker('ru_RU')
     op = OrderPage(driver)
     op.input_information(full_name=f.name(), email=f.email(), phone_number=f.phone_number())
+    """No delivery"""
     op.checkout_information()
