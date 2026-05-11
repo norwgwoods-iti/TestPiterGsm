@@ -48,11 +48,12 @@ class CartPage(Base):
     # Methods
 
     def select_order(self):
-        Logger.add_start_step(method='select_order')
+        Logger.add_start_method(method='select_order')
+        print(self.get_current_url())
         print(f'{self.get_name_product().text}: {self.get_price_product().text}')
         self.click_order_button()
         self.assert_word(expected_word=self.expected_title_order_page, current_word=self.get_current_title_order_page())
         self.assert_url(expected_url=self.expected_order_url)
-        Logger.add_end_step(url=self.get_current_url(), method='select_order')
+        Logger.add_end_method(current_url=self.get_current_url(), method='select_order')
 
 

@@ -110,8 +110,8 @@ class IMacPage(Base):
 
     def filter_and_add_imac_to_cart(self):
         """Filters"""
-        Logger.add_start_step(method='filter_and_add_imac_to_cart')
-        self.get_current_url()
+        Logger.add_start_method(method='filter_and_add_imac_to_cart')
+        print(self.get_current_url())
         self.click_filter_memory()
         self.click_filter_ram()
         self.click_filter_color_dropdown()
@@ -125,5 +125,5 @@ class IMacPage(Base):
         self.assert_word(expected_word=self.expected_title_cart_page, current_word=self.get_current_title_cart_page())
         self.assert_url(expected_url=self.expected_cart_url)
         self.assert_price(expected_price=self.get_price_product(),current_price=self.get_price_product_cart())
-        Logger.add_end_step(url=self.get_current_url(), method='filter_and_add_imac_to_cart')
+        Logger.add_end_method(current_url=self.get_current_url(), method='filter_and_add_imac_to_cart')
 

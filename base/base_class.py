@@ -13,7 +13,7 @@ class Base():
     """Method get current URL"""
     def get_current_url(self):
         get_url = self.driver.current_url
-        print(f'current URL: {get_url}')
+        return f'current URL: {get_url}'
 
     """Method assert price"""
     def assert_price(self, expected_price, current_price):

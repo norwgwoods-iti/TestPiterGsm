@@ -38,10 +38,10 @@ class AudioPage(Base):
     # Methods
 
     def select_category_headphones(self):
-        Logger.add_start_step(method='select_category_headphones')
-        self.get_current_url()
+        Logger.add_start_method(method='select_category_headphones')
+        print(self.get_current_url())
         self.click_headphones_button()
         self.assert_word(expected_word=self.expected_title_headphones_page, current_word=self.get_current_title_headphones_page())
         self.assert_url(self.expected_headphones_page_url)
-        Logger.add_end_step(url=self.get_current_url(), method='select_category_headphones')
+        Logger.add_end_method(current_url=self.get_current_url(), method='select_category_headphones')
 
