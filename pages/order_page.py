@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.keys import Keys
 
 from base.base_class import Base
+from utilities.logger import Logger
+
 
 class OrderPage(Base):
 
@@ -173,13 +175,16 @@ class OrderPage(Base):
 
     """Input Contact Info"""
     def input_information(self, full_name, email, phone_number):
+        Logger.add_start_step(method='input_information')
         self.get_current_url()
         self.input_full_name(full_name)
         self.input_email(email)
         self.input_phone_number(phone_number)
+        Logger.add_end_step(url=self.get_current_url(), method='input_information')
 
     """Input Delivery Info"""
     def input_delivery_information(self, city_address, entrance, floor, apartment):
+        Logger.add_start_step(method='input_delivery_information')
         self.click_delivery_button()
         self.input_city_address(city_address)
         self.input_entrance(entrance)
@@ -189,11 +194,18 @@ class OrderPage(Base):
         self.click_choice_day_delivery_button()
         self.click_choice_time_delivery_button()
         self.click_payment_button()
+        Logger.add_end_step(url=self.get_current_url(), method='input_delivery_information')
 
     """Checkout"""
     def checkout_information(self):
+        Logger.add_start_step(method='checkout_information')
         self.show_checkout_information()
         self.show_final_price()
         self.move_to_screenshot_element()
         self.get_screenshot()
         # self.click_confirm_order_button()
+        Logger.add_end_step(url=self.get_current_url(), method='checkout_information')
+
+
+
+

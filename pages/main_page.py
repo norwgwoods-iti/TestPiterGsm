@@ -83,8 +83,11 @@ class MainPage(Base):
 
     """Take Headphone"""
     def select_category_audio(self):
+        Logger.add_start_step(method='select_category_audio')
         self.get_current_url()
         self.click_cookie_button()
         self.click_category_audio_button()
         self.assert_word(expected_word=self.expected_title_audio_page, current_word=self.get_current_title_audio_page())
         self.assert_url(expected_url=self.expected_audio_page_url)
+        Logger.add_end_step(url=self.get_current_url(), method='select_category_audio')
+
