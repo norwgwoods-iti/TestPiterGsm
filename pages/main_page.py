@@ -3,6 +3,9 @@ from selenium.webdriver.common.by import By
 
 
 from base.base_class import Base
+from utilities.logger import Logger
+
+
 class MainPage(Base):
 
     def __init__(self, driver):
@@ -70,11 +73,13 @@ class MainPage(Base):
 
     """Take Mac"""
     def select_category_mac(self):
+        Logger.add_start_step(method='select_category_mac')
         self.get_current_url()
         self.click_cookie_button()
         self.click_category_mac_button()
         self.assert_word(expected_word=self.expected_title_mac_page, current_word=self.get_current_title_mac_page())
         self.assert_url(expected_url=self.expected_mac_page_url)
+        Logger.add_end_step(url=self.get_current_url(), method='select_category_mac')
 
     """Take Headphone"""
     def select_category_audio(self):

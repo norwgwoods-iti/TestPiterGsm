@@ -27,7 +27,7 @@ class OrderPage(Base):
     address_confirm_button_xpath = '//div[@id="closeBalloonBtn"]'
 
     choice_day_delivery_button_xpath = '//span[contains(text(), "завтра")]'
-    choice_time_delivery_button_xpath = '(//span[contains(text(), "19:00 до 23:00")])[2]'
+    choice_time_delivery_button_xpath = '(//span[contains(text(), "19:00 до 23:00")])[1]'
 
     """Pay"""
     payment_button_xpath = '//span[@class="pills__pill-text pay_system_button"]'
