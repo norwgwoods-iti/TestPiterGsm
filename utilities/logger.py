@@ -2,13 +2,13 @@ from datetime import datetime
 import os
 
 class Logger:
-    file_name = f'../logs/log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
+    file_name = f'.\\logs\\log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
 
     @classmethod
     def write_log_to_file(cls, data: str):
         with open(cls.file_name, 'a') as logger_file:
             logger_file.write(data)
-            
+
     @classmethod
     def add_start_method(cls, method: str):
         test_name = os.environ.get('PYTEST_CURRENT_TEST')
