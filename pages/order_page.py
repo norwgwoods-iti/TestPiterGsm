@@ -74,8 +74,11 @@ class OrderPage(Base):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.address_confirm_button_xpath)))
 
 
-    def get_choice_day_delivery_button(self):
-        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.choice_day_delivery_button_xpath)))
+    def get_tomorrow_delivery_button(self):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.day_tomorrow_delivery_button_xpath)))
+    def get_today_delivery_button(self):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.day_today_delivery_button_xpath)))
+
 
     def get_choice_time_delivery_button(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.choice_time_delivery_button_xpath)))
