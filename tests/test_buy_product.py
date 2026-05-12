@@ -28,7 +28,7 @@ def test_buy_product_imac(set_up):
     cp.select_order()
 
     f = Faker('ru_RU')
-    city_address = 'Санкт_Петербург, Есенина, д1'
+    city_address = 'Санкт-Петербург, Есенина, д1'
     entrance = 7
     floor = 3
     apartment = 456

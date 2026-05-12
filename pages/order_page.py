@@ -1,3 +1,4 @@
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.keys import Keys
@@ -28,7 +29,9 @@ class OrderPage(Base):
 
     address_confirm_button_xpath = '//div[@id="closeBalloonBtn"]'
 
-    choice_day_delivery_button_xpath = '//span[contains(text(), "завтра")]'
+    day_tomorrow_delivery_button_xpath = '//span[contains(text(), "завтра")]'
+    day_today_delivery_button_xpath = '//span[contains(text(), "сегодня")]'
+
     choice_time_delivery_button_xpath = '(//span[contains(text(), "19:00 до 23:00")])[1]'
 
     """Pay"""
@@ -144,10 +147,15 @@ class OrderPage(Base):
         self.get_address_confirm_button().click()
         print('Click address confirm button')
 
-
-    def click_choice_day_delivery_button(self):
-        self.get_choice_day_delivery_button().click()
+    """"""
+    def click_tomorrow_delivery_button(self):
+        self.get_tomorrow_delivery_button().click()
         print('Click choice day delivery button')
+
+    def click_today_delivery_button(self):
+        self.get_today_delivery_button().click()
+        print('Click choice day delivery button')
+    """"""
 
     def click_choice_time_delivery_button(self):
         self.get_choice_time_delivery_button().click()
@@ -194,7 +202,10 @@ class OrderPage(Base):
         self.input_floor(floor)
         self.input_apartment(apartment)
         self.click_address_confirm_button()
-        self.click_choice_day_delivery_button()
+        try:
+            self.click_today_delivery_button()
+        except TimeoutException:
+            self.click_tomorrow_delivery_button()
         self.click_choice_time_delivery_button()
         self.click_payment_button()
         Logger.add_end_method(current_url=self.get_current_url(), method='input_delivery_information')
