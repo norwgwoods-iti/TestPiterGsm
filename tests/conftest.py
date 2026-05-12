@@ -9,12 +9,14 @@ def set_up():
     options = Options()
     options.add_experimental_option("detach", True)
     options.add_argument('guest')
+    options.add_argument('--headless=new')
+    # options.add_argument('start-maximized')
 
     driver = webdriver.Chrome(options=options)
 
     base_url = 'https://pitergsm.ru/'
     driver.get(base_url)
-    driver.maximize_window()
+    # driver.maximize_window()
 
     yield driver
 

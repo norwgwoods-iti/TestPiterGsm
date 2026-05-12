@@ -55,17 +55,17 @@ class MainPage(Base):
 
     """Cookie"""
     def click_cookie_button(self):
-        self.get_cookie_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_cookie_button())
         print('Click Cookie Button')
 
     """Take Mac"""
     def click_category_mac_button(self):
-        self.get_category_mac_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_category_mac_button())
         print('Click Menu Category Button')
 
     """Take Headphone"""
     def click_category_audio_button(self):
-        self.get_category_audio_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_category_audio_button())
         print('Click Menu Audio Button')
 
 

@@ -1,7 +1,8 @@
-from selenium.common import TimeoutException
+# from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.keys import Keys
+import time
 
 from base.base_class import Base
 from utilities.logger import Logger
@@ -122,7 +123,8 @@ class OrderPage(Base):
 
     """Input Delivery Info"""
     def click_delivery_button(self):
-        self.get_delivery_button().click()
+        time.sleep(1)
+        self.driver.execute_script('arguments[0].click();', self.get_delivery_button())
         print('Click delivery button')
 
     def input_city_address(self, city_address):
@@ -144,26 +146,26 @@ class OrderPage(Base):
         print('Input apartment')
 
     def click_address_confirm_button(self):
-        self.get_address_confirm_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_address_confirm_button())
         print('Click address confirm button')
 
     """"""
     def click_tomorrow_delivery_button(self):
-        self.get_tomorrow_delivery_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_tomorrow_delivery_button())
         print('Click choice day delivery button')
 
     def click_today_delivery_button(self):
-        self.get_today_delivery_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_today_delivery_button())
         print('Click choice day delivery button')
     """"""
 
     def click_choice_time_delivery_button(self):
-        self.get_choice_time_delivery_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_choice_time_delivery_button())
         print('Click choice time delivery button')
 
     """Pay"""
     def click_payment_button(self):
-        self.get_payment_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_payment_button())
         print('Click payment button')
 
     """Checkout"""
@@ -174,7 +176,7 @@ class OrderPage(Base):
         print(f' К оплате: {self.get_final_price().text}')
 
     def click_confirm_order_button(self):
-        self.get_confirm_order_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_confirm_order_button())
         print('Click confirm order button')
 
     """Move to screenshot element"""
@@ -202,9 +204,9 @@ class OrderPage(Base):
         self.input_floor(floor)
         self.input_apartment(apartment)
         self.click_address_confirm_button()
-        try:
+        if self.is_element_visible(self.day_today_delivery_button_xpath, 'Today delivery button'):
             self.click_today_delivery_button()
-        except TimeoutException:
+        else:
             self.click_tomorrow_delivery_button()
         self.click_choice_time_delivery_button()
         self.click_payment_button()

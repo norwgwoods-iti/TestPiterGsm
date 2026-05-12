@@ -32,7 +32,8 @@ class AudioPage(Base):
     # Actions
 
     def click_headphones_button(self):
-        self.get_headphones_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_headphones_button())
+        print('Click headphones button')
 
 
     # Methods

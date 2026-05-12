@@ -98,11 +98,11 @@ class IMacPage(Base):
 
     """Add to cart"""
     def click_add_to_cart_button(self):
-        self.get_add_to_cart_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_add_to_cart_button())
         print('Click add cart button')
 
     def click_cart_button(self):
-        self.get_cart_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_cart_button())
         print('Click cart')
 
 
@@ -112,6 +112,7 @@ class IMacPage(Base):
         """Filters"""
         Logger.add_start_method(method='filter_and_add_imac_to_cart')
         print(self.get_current_url())
+        self.click_filter_button_if_visible()
         self.click_filter_memory()
         self.click_filter_ram()
         self.click_filter_color_dropdown()

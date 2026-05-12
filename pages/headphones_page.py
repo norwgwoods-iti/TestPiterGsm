@@ -65,9 +65,11 @@ class HeadphonePage(Base):
     """Filters"""
     def slide_filter_price(self):
         self.actions.click_and_hold(self.get_slider_price()).move_by_offset(30, 0).release().perform()
+        print('Slide price')
 
     def click_filter_brand(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_brand())
+        print('Click filter button')
 
     def click_filter_confirm(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_confirm())
@@ -75,11 +77,12 @@ class HeadphonePage(Base):
 
     """Add to cart"""
     def click_add_to_cart_button(self):
-        self.get_add_to_cart_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_add_to_cart_button())
+        print('Click add cart button')
 
     def click_cart_button(self):
-        self.get_cart_button().click()
-
+        self.driver.execute_script('arguments[0].click();', self.get_cart_button())
+        print('Click cart button')
 
     # Methods
 
@@ -87,6 +90,7 @@ class HeadphonePage(Base):
         """Filters"""
         Logger.add_start_method(method='filter_and_add_headphones_to_cart')
         print(self.get_current_url())
+        self.click_filter_button_if_visible()
         self.slide_filter_price()
         self.click_filter_brand()
         self.click_filter_confirm()

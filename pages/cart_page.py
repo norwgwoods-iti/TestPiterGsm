@@ -41,7 +41,7 @@ class CartPage(Base):
     # Actions
 
     def click_order_button(self):
-        self.get_order_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_order_button())
         print('Clicked checkout button')
 
 

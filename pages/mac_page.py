@@ -34,7 +34,7 @@ class MacPage(Base):
     # Actions
 
     def click_imac_button(self):
-        self.get_imac_button().click()
+        self.driver.execute_script('arguments[0].click();', self.get_imac_button())
         print('Click imac button')
 
 
