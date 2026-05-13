@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 
@@ -41,10 +42,11 @@ class MacPage(Base):
     # Methods
 
     def select_category_imac(self):
-        Logger.add_start_method(method='select_category_imac')
-        print(self.get_current_url())
-        self.click_imac_button()
-        self.assert_word(expected_word=self.expected_title_imac_page, current_word=self.get_current_title_imac_page())
-        self.assert_url(expected_url=self.expected_imac_page_url)
-        Logger.add_end_method(current_url=self.get_current_url(), method='select_category_imac')
+        with allure.step('Select category imac'):
+            Logger.add_start_method(method='select_category_imac')
+            print(self.get_current_url())
+            self.click_imac_button()
+            self.assert_word(expected_word=self.expected_title_imac_page, current_word=self.get_current_title_imac_page())
+            self.assert_url(expected_url=self.expected_imac_page_url)
+            Logger.add_end_method(current_url=self.get_current_url(), method='select_category_imac')
 

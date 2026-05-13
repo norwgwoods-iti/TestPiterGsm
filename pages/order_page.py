@@ -1,4 +1,5 @@
 # from selenium.common import TimeoutException
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.keys import Keys
@@ -188,39 +189,42 @@ class OrderPage(Base):
 
     """Input Contact Info"""
     def input_information(self, full_name, email, phone_number):
-        Logger.add_start_method(method='input_information')
-        print(self.get_current_url())
-        self.input_full_name(full_name)
-        self.input_email(email)
-        self.input_phone_number(phone_number)
-        Logger.add_end_method(current_url=self.get_current_url(), method='input_information')
+        with allure.step('Input contact info'):
+            Logger.add_start_method(method='input_information')
+            print(self.get_current_url())
+            self.input_full_name(full_name)
+            self.input_email(email)
+            self.input_phone_number(phone_number)
+            Logger.add_end_method(current_url=self.get_current_url(), method='input_information')
 
     """Input Delivery Info"""
     def input_delivery_information(self, city_address, entrance, floor, apartment):
-        Logger.add_start_method(method='input_delivery_information')
-        self.click_delivery_button()
-        self.input_city_address(city_address)
-        self.input_entrance(entrance)
-        self.input_floor(floor)
-        self.input_apartment(apartment)
-        self.click_address_confirm_button()
-        if self.is_element_visible(self.day_today_delivery_button_xpath, 'Today delivery button'):
-            self.click_today_delivery_button()
-        else:
-            self.click_tomorrow_delivery_button()
-        self.click_choice_time_delivery_button()
-        self.click_payment_button()
-        Logger.add_end_method(current_url=self.get_current_url(), method='input_delivery_information')
+        with allure.step('Input delivery info'):
+            Logger.add_start_method(method='input_delivery_information')
+            self.click_delivery_button()
+            self.input_city_address(city_address)
+            self.input_entrance(entrance)
+            self.input_floor(floor)
+            self.input_apartment(apartment)
+            self.click_address_confirm_button()
+            if self.is_element_visible(self.day_today_delivery_button_xpath, 'Today delivery button'):
+                self.click_today_delivery_button()
+            else:
+                self.click_tomorrow_delivery_button()
+            self.click_choice_time_delivery_button()
+            self.click_payment_button()
+            Logger.add_end_method(current_url=self.get_current_url(), method='input_delivery_information')
 
     """Checkout"""
     def checkout_information(self):
-        Logger.add_start_method(method='checkout_information')
-        self.show_checkout_information()
-        self.show_final_price()
-        self.move_to_screenshot_element()
-        self.get_screenshot()
-        # self.click_confirm_order_button()
-        Logger.add_end_method(current_url=self.get_current_url(), method='checkout_information')
+        with allure.step('Checkout information'):
+            Logger.add_start_method(method='checkout_information')
+            self.show_checkout_information()
+            self.show_final_price()
+            self.move_to_screenshot_element()
+            self.get_screenshot()
+            # self.click_confirm_order_button()
+            Logger.add_end_method(current_url=self.get_current_url(), method='checkout_information')
 
 
 

@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 
@@ -87,20 +88,21 @@ class HeadphonePage(Base):
     # Methods
 
     def filter_and_add_headphones_to_cart(self):
-        """Filters"""
-        Logger.add_start_method(method='filter_and_add_headphones_to_cart')
-        print(self.get_current_url())
-        self.click_filter_button_if_visible()
-        self.slide_filter_price()
-        self.click_filter_brand()
-        self.click_filter_confirm()
-        """Add to cart"""
-        self.click_add_to_cart_button()
-        self.get_screenshot()
-        self.click_cart_button()
-        """Check"""
-        self.assert_word(expected_word=self.expected_title_cart_page, current_word=self.get_current_title_cart_page())
-        self.assert_url(expected_url=self.expected_cart_url)
-        self.assert_price(expected_price=self.get_price_product(), current_price=self.get_price_product_cart())
-        Logger.add_end_method(current_url=self.get_current_url(), method='filter_and_add_headphones_to_cart')
+        with allure.step('Filter and add headphones to cart'):
+            """Filters"""
+            Logger.add_start_method(method='filter_and_add_headphones_to_cart')
+            print(self.get_current_url())
+            self.click_filter_button_if_visible()
+            self.slide_filter_price()
+            self.click_filter_brand()
+            self.click_filter_confirm()
+            """Add to cart"""
+            self.click_add_to_cart_button()
+            self.get_screenshot()
+            self.click_cart_button()
+            """Check"""
+            self.assert_word(expected_word=self.expected_title_cart_page, current_word=self.get_current_title_cart_page())
+            self.assert_url(expected_url=self.expected_cart_url)
+            self.assert_price(expected_price=self.get_price_product(), current_price=self.get_price_product_cart())
+            Logger.add_end_method(current_url=self.get_current_url(), method='filter_and_add_headphones_to_cart')
 

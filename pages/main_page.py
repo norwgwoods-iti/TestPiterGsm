@@ -1,6 +1,6 @@
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
-
+import allure
 
 from base.base_class import Base
 from utilities.logger import Logger
@@ -73,21 +73,23 @@ class MainPage(Base):
 
     """Take Mac"""
     def select_category_mac(self):
-        Logger.add_start_method(method='select_category_mac')
-        print(self.get_current_url())
-        self.click_cookie_button()
-        self.click_category_mac_button()
-        self.assert_word(expected_word=self.expected_title_mac_page, current_word=self.get_current_title_mac_page())
-        self.assert_url(expected_url=self.expected_mac_page_url)
-        Logger.add_end_method(current_url=self.get_current_url(), method='select_category_mac')
+        with allure.step('Select Category Mac'):
+            Logger.add_start_method(method='select_category_mac')
+            print(self.get_current_url())
+            self.click_cookie_button()
+            self.click_category_mac_button()
+            self.assert_word(expected_word=self.expected_title_mac_page, current_word=self.get_current_title_mac_page())
+            self.assert_url(expected_url=self.expected_mac_page_url)
+            Logger.add_end_method(current_url=self.get_current_url(), method='select_category_mac')
 
     """Take Headphone"""
     def select_category_audio(self):
-        Logger.add_start_method(method='select_category_audio')
-        print(self.get_current_url())
-        self.click_cookie_button()
-        self.click_category_audio_button()
-        self.assert_word(expected_word=self.expected_title_audio_page, current_word=self.get_current_title_audio_page())
-        self.assert_url(expected_url=self.expected_audio_page_url)
-        Logger.add_end_method(current_url=self.get_current_url(), method='select_category_audio')
+        with allure.step('Select Category Audio'):
+            Logger.add_start_method(method='select_category_audio')
+            print(self.get_current_url())
+            self.click_cookie_button()
+            self.click_category_audio_button()
+            self.assert_word(expected_word=self.expected_title_audio_page, current_word=self.get_current_title_audio_page())
+            self.assert_url(expected_url=self.expected_audio_page_url)
+            Logger.add_end_method(current_url=self.get_current_url(), method='select_category_audio')
 

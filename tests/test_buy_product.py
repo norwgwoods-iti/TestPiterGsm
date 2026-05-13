@@ -1,3 +1,4 @@
+import allure
 from faker import Faker
 
 from pages.audio_page import AudioPage
@@ -8,7 +9,7 @@ from pages.mac_page import MacPage
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 
-
+@allure.description('Test buy Imac')
 def test_buy_product_imac(set_up):
 
     driver = set_up
@@ -38,6 +39,7 @@ def test_buy_product_imac(set_up):
     op.input_delivery_information(city_address=city_address,entrance=entrance,floor=floor,apartment=apartment)
     op.checkout_information()
 
+@allure.description('Test Buy Marshall')
 def test_buy_product_marshall(set_up):
 
     driver = set_up

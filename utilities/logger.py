@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 
 class Logger:
-    file_name = f'.\\logs\\log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
+    file_name = f'./logs/log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
 
     @classmethod
     def write_log_to_file(cls, data: str):

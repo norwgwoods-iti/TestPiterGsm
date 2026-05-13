@@ -40,7 +40,7 @@ class Base():
         now_date = datetime.now().strftime("%Y.%m.%d %H-%M-%S")
         screenshot_name = f'screenshot ({now_date}).png'
         time.sleep(1)
-        self.driver.save_screenshot(f'.\\screen\\{screenshot_name}')
+        self.driver.save_screenshot(f'./screen/{screenshot_name}')
         print(f'Screenshot Saved: {screenshot_name}')
 
     """Method is visible element"""
