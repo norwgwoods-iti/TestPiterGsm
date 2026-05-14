@@ -9,7 +9,7 @@ from pages.mac_page import MacPage
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 
-@allure.description('Test buy Imac')
+@allure.description('Test Buy Imac')
 def test_buy_product_imac(set_up):
 
     driver = set_up
