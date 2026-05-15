@@ -5,6 +5,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 import time
 from datetime import datetime
+from pathlib import Path
 
 from utilities.logger import Logger
 
@@ -39,8 +40,9 @@ class Base():
     def get_screenshot(self):
         now_date = datetime.now().strftime("%Y.%m.%d %H-%M-%S")
         screenshot_name = f'screenshot ({now_date}).png'
+        current_dir = str(Path(__file__).resolve().parent.parent / 'screen')
         time.sleep(1)
-        self.driver.save_screenshot(f'./screen/{screenshot_name}')
+        self.driver.save_screenshot(f'{current_dir}/{screenshot_name}')
         print(f'Screenshot Saved: {screenshot_name}')
 
     """Method is visible element"""

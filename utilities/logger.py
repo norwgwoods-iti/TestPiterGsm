@@ -1,8 +1,10 @@
 from datetime import datetime
 import os
+from pathlib import Path
 
 class Logger:
-    file_name = f'./logs/log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
+    current_dir = str(Path(__file__).resolve().parent.parent / 'logs')
+    file_name = f'{current_dir}/log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
 
     @classmethod
     def write_log_to_file(cls, data: str):
