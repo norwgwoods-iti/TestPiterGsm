@@ -14,6 +14,9 @@ def test_buy_product_imac(set_up):
 
     driver = set_up
 
+    base_url = 'https://pitergsm.ru/'
+    driver.get(base_url)
+
     print('Test 1')
 
     mp = MainPage(driver)
@@ -39,10 +42,14 @@ def test_buy_product_imac(set_up):
     op.input_delivery_information(city_address=city_address,entrance=entrance,floor=floor,apartment=apartment)
     op.checkout_information()
 
+
 @allure.description('Test Buy Marshall')
 def test_buy_product_marshall(set_up):
 
     driver = set_up
+
+    base_url = 'https://pitergsm.ru/'
+    driver.get(base_url)
 
     print('Test 2')
 
