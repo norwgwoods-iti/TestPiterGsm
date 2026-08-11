@@ -19,6 +19,65 @@
 
 ---
 
+## 🚀 Быстрый старт
+
+### 1. Клонирование репозитория
+
+```bash
+git clone [https://github.com/norwgwoods-iti/TestPiterGsm.git](https://github.com/norwgwoods-iti/TestPiterGsm.git)
+cd TestPiterGsm
+```
+
+### 2. Настройка виртуального окружения
+macOS / Linux:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+Windows:
+
+```DOS
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Установка зависимостей
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 🧪 Запуск тестов
+Запуск всех тестов:
+
+```bash
+pytest
+```
+
+Запуск с подробным выводом (verbose):
+
+```bash
+pytest -v -s
+```
+
+Запуск конкретного тестового файла:
+
+```bash
+pytest tests/test_buy_product.py -v -s
+```
+
+### 📊 Логи и скриншоты
+
+Логи (logs/): Все действия в ходе выполнения шагов (клики, вводы, переход по URL, проверки) фиксируются через utilities/logger.py.
+Скриншоты (screen/): При необходимости снятия снимка экрана (например, подтверждение шага или фиксация состояния) скриншоты автоматически сохраняются с меткой времени в директорию screen/.
+
+### 👨‍💻 Автор
+GitHub: @norwgwoods-iti
+
+
+
 ## 📁 Структура проекта
 
 ```text
