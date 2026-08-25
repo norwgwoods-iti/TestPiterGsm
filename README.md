@@ -14,6 +14,7 @@
 * **Testing Framework:** Pytest
 * **Browser Automation:** Selenium WebDriver
 * **Architecture:** Page Object Model (POM)
+* **Reporting:** Allure Framework (`allure-pytest`)
 * **Logging:** Custom logger module (`utilities/logger.py`)
 * **Artifacts:** Automatic screenshots & execution logs
 
@@ -49,26 +50,63 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 🧪 Запуск тестов
-Запуск всех тестов:
+## 🧪 Запуск тестов
 
+### Базовые команды
+Запуск всех тестов:
 ```bash
 pytest
 ```
-
 Запуск с подробным выводом (verbose):
-
 ```bash
 pytest -v -s
 ```
-
 Запуск конкретного тестового файла:
-
 ```bash
 pytest tests/test_buy_product.py -v -s
 ```
+Запуск одной конкретной тестовой функции:
+```bash
+pytest tests/test_buy_product.py::test_specific_function
+```
 
-### 📊 Логи и скриншоты
+---
+
+## 📊 Генерация отчетов Allure
+
+Для сбора результатов и просмотра красивых интерактивных графиков используйте интеграцию с Allure.
+
+### 1. Запуск тестов со сбором результатов
+Добавьте флаг `--alluredir`, чтобы сохранить промежуточные данные в папку `allure-results`:
+
+```bash
+# Прогон всех тестов
+pytest --alluredir=allure-results
+
+# Прогон одного конкретного теста
+pytest tests/test_buy_product.py::test_specific_function --alluredir=allure-results
+```
+
+### 2. Локальный просмотр отчета (Allure Serve)
+Чтобы автоматически собрать HTML-отчет во временную папку и мгновенно открыть его в браузере по умолчанию, выполните:
+
+```bash
+allure serve allure-results
+```
+*Для завершения работы локального веб-сервера нажмите `Ctrl + C` в окне терминала.*
+
+### 3. Генерация статического отчета (Опционально)
+Если вам нужно сохранить готовый отчет в виде папки с веб-страницами (например, для публикации на GitHub Pages или отправки архивом), соберите его вручную:
+
+```bash
+allure generate allure-results -o allure-report --clean
+```
+* Флаг `-o allure-report` задает конечную папку.
+* Флаг `--clean` предварительно очищает старые результаты.
+
+---
+
+### 📊 Логи и скриншоты (без Allure)
 
 - Логи (logs/): Все действия в ходе выполнения шагов (клики, вводы, переход по URL, проверки) фиксируются через utilities/logger.py.
 - Скриншоты (screen/): При необходимости снятия снимка экрана (например, подтверждение шага или фиксация состояния) скриншоты автоматически сохраняются с меткой времени в директорию screen/.
