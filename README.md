@@ -115,7 +115,7 @@ allure generate allure-results -o allure-report --clean
 ## 📁 Структура проекта
 
 ```text
-.
+TestPiterGsm/
 ├── base/                   # Базовые классы и общие методы работы со страницей
 │   ├── __init__.py
 │   └── base_class.py       # Base Page класс (драйвер, логирование, скриншоты)
