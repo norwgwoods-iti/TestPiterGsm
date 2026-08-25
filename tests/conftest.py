@@ -17,7 +17,7 @@ def set_up(request):
         options = ChromeOptions()
         options.add_experimental_option("detach", True)
         options.add_argument('guest')
-        options.add_argument('--headless=new')
+        # options.add_argument('--headless=new')
         driver = webdriver.Chrome(options=options)
     elif name_browser == "firefox":
         print('Start Test in Firefox')

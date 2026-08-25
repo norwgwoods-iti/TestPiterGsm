@@ -116,9 +116,9 @@ class IMacPage(Base):
             print(self.get_current_url())
             self.click_filter_button_if_visible()
             self.click_filter_memory()
-            self.click_filter_ram()
-            self.click_filter_color_dropdown()
-            self.click_filter_color()
+            # self.click_filter_ram()
+            # self.click_filter_color_dropdown()
+            # self.click_filter_color()
             self.click_filter_confirm()
             """Add to cart"""
             self.click_add_to_cart_button()
