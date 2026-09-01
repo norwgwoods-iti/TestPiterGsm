@@ -2,7 +2,7 @@
 /screen
 __pycache__/
 .venv
-.idea
+.idea/
 .DS_Store
 *.txt
 *.log
