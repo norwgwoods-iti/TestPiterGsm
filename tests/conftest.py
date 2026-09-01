@@ -30,5 +30,3 @@ def set_up(request):
     print("Quit Browser")
     driver.quit()
     print("Finish Test")
-
-#  --tb=line - короткий отчет по тесту в консоли
