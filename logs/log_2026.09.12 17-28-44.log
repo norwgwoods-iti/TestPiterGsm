@@ -1,0 +1,32 @@
+-------
+Test name: tests/test_buy_product.py::TestBuyProduct::test_buy_product_imac (call)
+Start time: 2026.09.12 17-28-45
+Start test method: select_category_mac
+
+End time: 2026.09.12 17-28-51
+End method: select_category_mac
+URL: current URL: https://pitergsm.ru/catalog/mac/
+-------
+-------
+Test name: tests/test_buy_product.py::TestBuyProduct::test_buy_product_imac (call)
+Start time: 2026.09.12 17-28-51
+Start test method: select_category_imac
+
+End time: 2026.09.12 17-28-52
+End method: select_category_imac
+URL: current URL: https://pitergsm.ru/catalog/mac/imac/
+-------
+-------
+Test name: tests/test_buy_product.py::TestBuyProduct::test_buy_product_imac (call)
+Start time: 2026.09.12 17-28-52
+Start test method: filter_and_add_imac_to_cart
+
+End time: 2026.09.12 17-28-57
+End method: filter_and_add_imac_to_cart
+URL: current URL: https://pitergsm.ru/personal/cart/
+-------
+-------
+Test name: tests/test_buy_product.py::TestBuyProduct::test_buy_product_imac (call)
+Start time: 2026.09.12 17-28-57
+Start test method: select_order
+

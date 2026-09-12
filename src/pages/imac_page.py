@@ -1,3 +1,4 @@
+import time
 import allure
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
@@ -47,7 +48,10 @@ class IMacPage(Base):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//label[@data-tooltip="{memory}"]')))
 
     def get_filter_ram(self, ram: str | None = None):
-        return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//span[contains(text(), "{ram}")]')))
+        if ram:
+            return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//span[contains(text(), "{ram}")]')))
+        else:
+            return None
 
     def get_filter_color_dropdown(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_color_dropdown_xpath)))
@@ -83,8 +87,12 @@ class IMacPage(Base):
         print('Click filter memory')
 
     def click_filter_ram(self, ram: str | None = None):
-        self.driver.execute_script('arguments[0].click();', self.get_filter_ram(ram))
-        print('Click filter ram')
+        if ram:
+            self.driver.execute_script('arguments[0].click();', self.get_filter_ram(ram))
+            print('Click filter ram')
+        else:
+            print('No filter ram')
+            return None
 
     def click_filter_color_dropdown(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_color_dropdown())
@@ -119,6 +127,7 @@ class IMacPage(Base):
 
             self.click_filter_button_if_visible()
             self.click_filter_memory(memory)
+            # time.sleep(1)
             self.click_filter_ram(ram)
             # self.click_filter_color_dropdown()
             # self.click_filter_color()

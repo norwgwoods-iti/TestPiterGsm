@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 class Logger:
-    current_dir = str(Path(__file__).resolve().parent.parent.parent.parent / 'logs')
+    current_dir = str(Path(__file__).resolve().parent.parent.parent / 'logs')
     file_name = f'{current_dir}/log_{datetime.now().strftime("%Y.%m.%d %H-%M-%S")}.log'
 
     @classmethod
