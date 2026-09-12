@@ -1,0 +1,34 @@
+[project]
+name = "piter-gsm-test"
+version = "0.1.0"
+description = "Automation tests for PiterGSM"
+readme = "README.md"
+authors = [
+    { name = "norwgwoods-iti", email = "norwgwoods@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "allure-pytest>=2.16.0",
+    "faker>=40.38.0",
+    "selenium>=4.49.0"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+python_files = ['test_*.py', '*_test.py']
+python_classes = ["Test*"]
+python_functions = ['test_*']
+markers = [
+    "smoke: smoke tests",
+    "regression: regression tests",
+    "critical-path: critical path tests",
+]
+addopts = [
+    "-vv",				        # подробный вывод хода теста
+    "--import-mode=importlib"  	# меньше проблем с импортами
+]
