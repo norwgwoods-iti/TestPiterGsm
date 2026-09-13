@@ -74,7 +74,7 @@ class HeadphonePage(Base):
 
     def click_filter_brand(self, filter_brand):
         self.driver.execute_script('arguments[0].click();', self.get_filter_brand(filter_brand))
-        print('Click filter button')
+        print('Click filter brand button')
 
     def click_filter_confirm(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_confirm())

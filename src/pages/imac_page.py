@@ -22,6 +22,7 @@ class IMacPage(Base):
     price_product_catalog_xpath = '//div[@class="cart-prodcard__price-current"]'
     price_product_cart_xpath = '//div[@class="cart-prodcard__price-current"]'
 
+    product_titles_xpath = '//a[@class="prodcard__name"]'
 
     # Locators
 
@@ -149,12 +150,17 @@ class IMacPage(Base):
     def filter_imac_by_memory(self, memory: str | None = None):
         with allure.step('Filter imac by memory'):
             Logger.add_start_method(method='filter_imac_by_memory')
+
             print(self.get_current_url())
+
+            self.assert_url(expected_url=MacPage.expected_imac_page_url)
             self.click_filter_button_if_visible()
             self.click_filter_memory(memory)
             self.click_filter_confirm()
             """ Check """
-            self.assert_url(MacPage.expected_imac_page_url)
+
+            self.assertion_products_title(key_word=memory.replace('GB', ''), product_titles_list_xpath=self.product_titles_xpath)
+
             Logger.add_end_method(current_url=self.get_current_url(), method='filter_imac_by_memory')
 
 

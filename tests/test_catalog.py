@@ -1,13 +1,15 @@
 import allure
 import pytest
 
-
+from base.base_class import Base
 from src.pages.main_page import MainPage
 from src.pages.mac_page import MacPage
 from src.pages.audio_page import AudioPage
 from src.pages.headphones_page import HeadphonePage
 from src.pages.imac_page import IMacPage
 from src.pages.cart_page import CartPage
+
+from src.base.base_class import Base
 
 @allure.epic("Internet-shop PiterGSM")
 @allure.feature("Catalog")
@@ -26,6 +28,8 @@ class TestCatalog:
         main_page = MainPage(driver)
         main_page.search_product(product_name='she')
 
+        main_page.get_screenshot()
+
 
     @allure.title("Search iMac")
     @pytest.mark.regression
@@ -37,6 +41,8 @@ class TestCatalog:
 
         main_page = MainPage(driver)
         main_page.search_product(product_name="iMac")
+
+        main_page.get_screenshot()
 
 
     @allure.title("Search headphones")
@@ -50,6 +56,8 @@ class TestCatalog:
         main_page = MainPage(driver)
         main_page.search_product("Наушники")
 
+        main_page.get_screenshot()
+
 
     @allure.title("Open Mac category")
     @pytest.mark.regression
@@ -62,6 +70,7 @@ class TestCatalog:
         main_page = MainPage(driver)
         main_page.select_category_mac()
 
+        main_page.get_screenshot()
 
     @allure.title("Open Audio category")
     @pytest.mark.regression
@@ -73,6 +82,8 @@ class TestCatalog:
 
         main_page = MainPage(driver)
         main_page.select_category_audio()
+
+        main_page.get_screenshot()
 
 
     @allure.title("Open iMac category")
@@ -88,6 +99,8 @@ class TestCatalog:
 
         mac_page = MacPage(driver)
         mac_page.select_category_imac()
+
+        main_page.get_screenshot()
 
 
     @allure.title("Open headphones category")
@@ -105,6 +118,8 @@ class TestCatalog:
 
         audio_page = AudioPage(driver)
         audio_page.select_category_headphones(category=category_headphones)
+
+        audio_page.get_screenshot()
 
 
     @allure.title("Filter iMac by 256 GB")
@@ -126,6 +141,8 @@ class TestCatalog:
         imac_page = IMacPage(driver)
         imac_page.filter_imac_by_memory(memory=data_memory_size)
 
+        imac_page.get_screenshot()
+
 
     @allure.title("Add iMac to cart")
     @pytest.mark.regression
@@ -143,6 +160,8 @@ class TestCatalog:
 
         imac_page = IMacPage(driver)
         imac_page.add_imac_to_cart()
+
+        imac_page.get_screenshot()
 
 
     @allure.title("Filter headphones by Marshall")
@@ -168,15 +187,18 @@ class TestCatalog:
         headphones_page.click_filter_button_if_visible()
         headphones_page.click_filter_brand(filter_brand=filter_brand_marshall)
         headphones_page.click_filter_confirm()
+        headphones_page.assertion_products_title(key_word=filter_brand_marshall, product_titles_list_xpath=headphones_page.product_titles_xpath)
 
-        assert driver.current_url == AudioPage.expected_headphones_page_url
+        headphones_page.get_screenshot()
+
 
     @allure.title("Open checkout page")
     @pytest.mark.regression
     def test_checkout_page(self, set_up):
-
         driver = set_up
         driver.get(self.base_url)
+
+        print('Test - Open checkout page')
 
         main_page = MainPage(driver)
         main_page.select_category_audio()
@@ -188,6 +210,9 @@ class TestCatalog:
         headphones_page = HeadphonePage(driver)
         filter_brand_apple = 'Apple'
         headphones_page.filter_and_add_headphones_to_cart(filter_brand=filter_brand_apple)
+        headphones_page.assertion_products_title(key_word=filter_brand_apple, product_titles_list_xpath=headphones_page.product_titles_xpath)
 
         cart_page = CartPage(driver)
         cart_page.select_order()
+
+        cart_page.get_screenshot()

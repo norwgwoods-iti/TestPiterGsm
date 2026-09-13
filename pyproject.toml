@@ -23,10 +23,11 @@ testpaths = ["tests"]
 python_files = ['test_*.py', '*_test.py']
 python_classes = ["Test*"]
 python_functions = ['test_*']
+pythonpath = [".", "src"]
 markers = [
     "smoke: smoke tests",
     "regression: regression tests",
-    "critical-path: critical path tests",
+    "critical_path: critical path tests",
 ]
 addopts = [
     "-vv",				        # подробный вывод хода теста

@@ -31,7 +31,7 @@ class TestPiterGsm:
         print('Test Search Valid Product')
 
         main_page = MainPage(driver)
-        main_page.search_product("iPhone 15")
+        main_page.search_product("iPhone 15 256")
 
 
     @allure.title('Check Search Invalid Product (Negative)')
@@ -45,7 +45,7 @@ class TestPiterGsm:
         product_name = "qwertyuiop123456789"
         main_page.find_product(product_name=product_name)
 
-        main_page.assertion_products_title(product_name=product_name)
+        main_page.assertion_products_title(key_word=product_name, product_titles_list_xpath=main_page.product_titles_xpath)
 
     #
     # # 5. Добавление товара в корзину из выдачи поиска

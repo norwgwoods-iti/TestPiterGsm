@@ -5,13 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fee84de-b197-4a07-9177-b5ebdb5f00ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/piter-gsm-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/piter-gsm-test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-17-18.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-17-44.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-18-23.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-20-11.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-20-47.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-22-26.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_2026.09.12 17-28-44.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/base_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/base_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/headphones_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/headphones_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/imac_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/imac_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/main_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/main_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_buy_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_buy_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_catalog.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_catalog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_other.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_other.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_send_field.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,23 +85,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.hui.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ааа.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/nd/IT/pet/TestPiterGsm&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.hhh.executor": "Run",
+    "Python.hui.executor": "Run",
+    "Python.ааа.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/nd/IT/pet/TestPiterGsm",
+    "node.js.detected.package.jshint": "true",
+    "node.js.selected.package.jshint": "",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="hhh" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="piter-gsm-test" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hhh.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.hhh" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

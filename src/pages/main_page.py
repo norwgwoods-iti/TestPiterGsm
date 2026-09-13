@@ -30,19 +30,7 @@ class MainPage(Base):
     @staticmethod
     def expected_search_url(product_name: str | list):
 
-        product_url = product_name.split(' ')
-
-        list_url = []
-        i = 1
-        list_url.append(product_url[0])
-        while i < len(product_url):
-            list_url.append(f'%20{product_url[i]}')
-            i += 1
-
-        result = "".join(list_url)
-
-        return f'https://pitergsm.ru/?digiSearch=true&term={result}&params=%7Csort%3DDEFAULT'
-
+        return f'https://pitergsm.ru/?digiSearch=true&term={product_name}&params=|sort=DEFAULT'
 
 
     # Locators
@@ -92,14 +80,6 @@ class MainPage(Base):
     def get_search_button(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.search_button_xpath)))
 
-    """ Title Search Products """
-    def get_product_titles(self):
-        time.sleep(1)
-        product_titles = self.wait.until(ec.visibility_of_all_elements_located((By. XPATH, self.product_titles_xpath)))
-        titles = []
-        for title in product_titles:
-            titles.append(title.text)
-        return titles
 
     # Actions
 
@@ -139,11 +119,7 @@ class MainPage(Base):
         self.click_search_button()
         print(f'Find Product:{product_name}')
 
-    def assertion_products_title(self, product_name: str | list):
-        titles = self.get_product_titles()
-        assert len(titles) > 0
-        assert any(product_name.lower() in title.lower() for title in titles)
-        print('Search product success')
+
 
     # Methods
 
@@ -151,11 +127,14 @@ class MainPage(Base):
     def select_category_mac(self):
         with allure.step('Select Category Mac'):
             Logger.add_start_method(method='select_category_mac')
+
             print(self.get_current_url())
+
             self.click_cookie_button()
             self.click_category_mac_button()
             self.assert_word(expected_word=self.expected_title_mac_page, current_word=self.get_current_title_mac_page())
             self.assert_url(expected_url=self.expected_mac_page_url)
+
             Logger.add_end_method(current_url=self.get_current_url(), method='select_category_mac')
 
 
@@ -163,12 +142,16 @@ class MainPage(Base):
     def select_category_audio(self):
         with allure.step('Select Category Audio'):
             Logger.add_start_method(method='select_category_audio')
+
             print(self.get_current_url())
+
             self.click_cookie_button()
             self.click_category_audio_button()
             self.assert_word(expected_word=self.expected_title_audio_page, current_word=self.get_current_title_audio_page())
             self.assert_url(expected_url=self.expected_audio_page_url)
+
             Logger.add_end_method(current_url=self.get_current_url(), method='select_category_audio')
+
 
     """ Search Product """
     def search_product(self, product_name):
@@ -182,11 +165,11 @@ class MainPage(Base):
 
             time.sleep(0.5)  # url меняется не так быстро
 
-            print(self.get_current_url())
-            print(self.expected_search_url(product_name))
+            print(f'"{self.get_current_url()}"')
+            print(f'Expected URL: "{self.expected_search_url(product_name)}"')
 
-            self.assert_url(MainPage.expected_search_url(product_name))
+            self.assert_url(expected_url=MainPage.expected_search_url(product_name))
 
-            self.assertion_products_title(product_name)
+            self.assertion_products_title(key_word=product_name, product_titles_list_xpath=self.product_titles_xpath)
 
             Logger.add_end_method(current_url=self.get_current_url(), method='search_product')

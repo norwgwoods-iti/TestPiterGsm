@@ -1,6 +1,8 @@
 import time
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import unquote
+
 from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
@@ -16,10 +18,33 @@ class Base:
         self.wait = WebDriverWait(driver, 3)
         self.actions = ActionChains(self.driver)
 
+
+    product_titles_xpath = '//a[@class="prodcard__name"]'
+
+
     """Method get current URL"""
     def get_current_url(self):
         get_url = self.driver.current_url
+        get_url = unquote(get_url)
         return f'current URL: {get_url}'
+
+
+    """ Method Get Titles Product """
+    def get_product_titles(self, product_titles_list_xpath):
+        time.sleep(1)
+        product_titles = self.wait.until(ec.visibility_of_all_elements_located((By.XPATH, product_titles_list_xpath)))
+        titles = []
+        for title in product_titles:
+            titles.append(title.text)
+        return titles
+
+
+    def assertion_products_title(self, key_word: str | list, product_titles_list_xpath: str):
+        titles = self.get_product_titles(product_titles_list_xpath)
+        assert len(titles) > 0
+        assert any(key_word.lower() in title.lower() for title in titles)
+        print('Search product success')
+
 
     """Method assert price"""
     def assert_price(self, expected_price, current_price):
@@ -33,14 +58,14 @@ class Base:
 
     """Method assert URL"""
     def assert_url(self, expected_url):
-        assert expected_url == self.driver.current_url
+        assert expected_url == unquote(self.driver.current_url), 'Error assert URL'
         print('Success assert URL')
 
     """Method Screenshot"""
     def get_screenshot(self):
         now_date = datetime.now().strftime("%Y.%m.%d %H-%M-%S")
         screenshot_name = f'screenshot ({now_date}).png'
-        current_dir = str(Path(__file__).resolve().parent.parent.parent.parent / 'screenshots')
+        current_dir = str(Path(__file__).resolve().parent.parent.parent / 'screenshots')
         time.sleep(1)
         self.driver.save_screenshot(f'{current_dir}/{screenshot_name}')
         print(f'Screenshot Saved: {screenshot_name}')

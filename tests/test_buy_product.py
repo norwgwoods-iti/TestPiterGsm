@@ -18,7 +18,7 @@ class TestBuyProduct:
     base_url = 'https://pitergsm.ru/'
 
     @allure.title('Check Buy Imac')
-    # @pytest.mark.critical
+    @pytest.mark.critical_path
     def test_buy_product_imac(self, set_up):
         driver = set_up
 
