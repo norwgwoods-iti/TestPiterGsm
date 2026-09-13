@@ -20,6 +20,7 @@ class Base:
 
 
     product_titles_xpath = '//a[@class="prodcard__name"]'
+    catalog_title_xpath = '//h1[@class="catalog__title"]'
 
 
     """Method get current URL"""

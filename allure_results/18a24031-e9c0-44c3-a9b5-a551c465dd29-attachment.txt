@@ -1,0 +1,45 @@
+Start Test in Chrome
+Test Buy Imac
+current URL: https://pitergsm.ru/
+Click Cookie Button
+Click Menu Category Button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/mac/
+Click imac button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/mac/imac/
+Click filter button
+Click filter memory
+No filter ram
+Click filter confirm
+Click add cart button
+Screenshot Saved: screenshot (2026.09.14 00-40-49).png
+Click cart
+Success assert word
+Success assert URL
+Success assert price
+current URL: https://pitergsm.ru/personal/cart/
+Моноблок Apple iMac 24 Retina 4,5K (M4, 8C CPU/8C GPU, 2024), 16 Гб, 256 Гб SSD, серебристый (MWUC3): 178 390 ₽
+Clicked checkout button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/personal/order/make/
+Input full name
+Input email
+Input phone number
+Click delivery button
+Input city address
+Input entrance
+Input floor
+Input apartment
+Click address confirm button
+Click choice day delivery button
+Click choice time delivery button
+Click payment button
+Способ получчения: Доставка по СПБ - 500р. ориентировочно от 1 до 1 дней , без учета дня отправки и получения, при заказе до 18:00 доставка в тот же день
+ К оплате: 178 890 руб.
+Screenshot Saved: screenshot (2026.09.14 00-40-55).png
+Quit Browser
+Finish Test

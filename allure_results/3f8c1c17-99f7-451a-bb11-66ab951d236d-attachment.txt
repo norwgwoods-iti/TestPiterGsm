@@ -1,0 +1,14 @@
+Start Test in Chrome
+Test - Search iMac
+current URL: https://pitergsm.ru/
+Click Cookie Button
+Input: iMac
+Click search button
+Find Product:iMac
+"current URL: https://pitergsm.ru/?digiSearch=true&term=iMac&params=|sort=DEFAULT"
+Expected URL: "https://pitergsm.ru/?digiSearch=true&term=iMac&params=|sort=DEFAULT"
+Success assert URL
+Search product success
+Screenshot Saved: screenshot (2026.09.14 00-41-32).png
+Quit Browser
+Finish Test

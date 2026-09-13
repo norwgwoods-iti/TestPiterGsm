@@ -24,17 +24,22 @@ class TestPiterGsm:
 
 
     @allure.title('Check Search Valid Product')
-    def test_search_valid_product(self, set_up):
+    @pytest.mark.parametrize('product_name', ['iPhone 15 256', 'Marshall'])
+    def test_search_valid_product(self, set_up, product_name):
         driver = set_up
         driver.get(self.base_url)
 
         print('Test Search Valid Product')
 
         main_page = MainPage(driver)
-        main_page.search_product("iPhone 15 256")
+        # product_name = "iPhone 15 256"
+        main_page.search_product(product_name=product_name)
+
+        main_page.assertion_products_title(key_word=product_name, product_titles_list_xpath=main_page.product_titles_xpath)
 
 
     @allure.title('Check Search Invalid Product (Negative)')
+    @pytest.mark.negative
     def test_search_invalid_product(self, set_up):
         driver = set_up
         driver.get(self.base_url)
@@ -113,5 +118,3 @@ class TestPiterGsm:
     # def test_empty_cart_view(self, driver):
     #     cart_page = CartPage(driver)
     #     cart_page.open_cart()
-
-        assert cart_page.get_cart_items_count() == 0

@@ -1,0 +1,21 @@
+Start Test in Chrome
+Test - Add iMac to cart
+current URL: https://pitergsm.ru/
+Click Cookie Button
+Click Menu Category Button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/mac/
+Click imac button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/mac/imac/
+Click add cart button
+Screenshot Saved: screenshot (2026.09.14 00-42-42).png
+Click cart
+Success assert word
+Success assert URL
+Success assert price
+Screenshot Saved: screenshot (2026.09.14 00-42-44).png
+Quit Browser
+Finish Test

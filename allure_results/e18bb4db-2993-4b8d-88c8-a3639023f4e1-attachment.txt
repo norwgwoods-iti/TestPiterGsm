@@ -1,0 +1,31 @@
+Start Test in Chrome
+Test - Open checkout page
+current URL: https://pitergsm.ru/
+Click Cookie Button
+Click Menu Audio Button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/audio/
+Click headphones button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/audio/naushniki/
+Click filter button
+Slide price
+Click filter brand button
+Click filter confirm
+Click add cart button
+Screenshot Saved: screenshot (2026.09.14 00-43-10).png
+Click cart button
+Success assert word
+Success assert URL
+Success assert price
+Search product success
+current URL: https://pitergsm.ru/personal/cart/
+Беспроводные наушники Apple AirPods 4 c шумоподавлением (MXP93): 17 790 ₽
+Clicked checkout button
+Success assert word
+Success assert URL
+Screenshot Saved: screenshot (2026.09.14 00-43-15).png
+Quit Browser
+Finish Test

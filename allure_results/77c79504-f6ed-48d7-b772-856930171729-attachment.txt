@@ -1,0 +1,14 @@
+Start Test in Chrome
+Test - Open headphones category
+current URL: https://pitergsm.ru/
+Click Cookie Button
+Click Menu Audio Button
+Success assert word
+Success assert URL
+current URL: https://pitergsm.ru/catalog/audio/
+Click headphones button
+Success assert word
+Success assert URL
+Screenshot Saved: screenshot (2026.09.14 00-42-20).png
+Quit Browser
+Finish Test

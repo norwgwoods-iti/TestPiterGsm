@@ -70,7 +70,7 @@ class TestBuyProduct:
         category_headphones = 'Наушники'
 
         audio_page = AudioPage(driver)
-        audio_page.select_category_headphones(category=category_headphones)
+        audio_page.select_subcategory(category=category_headphones)
 
         filter_brand_marshall = 'Marshall'
 

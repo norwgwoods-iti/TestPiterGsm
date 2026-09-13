@@ -1,0 +1,13 @@
+Start Test in Chrome
+Test Search Valid Product
+current URL: https://pitergsm.ru/
+Click Cookie Button
+Input: iPhone 15 256
+Click search button
+Find Product:iPhone 15 256
+"current URL: https://pitergsm.ru/?digiSearch=true&term=iPhone 15 256&params=|sort=DEFAULT"
+Expected URL: "https://pitergsm.ru/?digiSearch=true&term=iPhone 15 256&params=|sort=DEFAULT"
+Success assert URL
+Search product success
+Quit Browser
+Finish Test

@@ -1,0 +1,7 @@
+Start Test in Chrome
+Test Search Invalid Product (Negative)
+Input: qwertyuiop123456789
+Click search button
+Find Product:qwertyuiop123456789
+Quit Browser
+Finish Test
