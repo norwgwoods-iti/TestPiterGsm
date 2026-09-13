@@ -1,5 +1,0 @@
-Start Test in Chrome
-Test Open Main Page
-Check assertion main title
-Quit Browser
-Finish Test
