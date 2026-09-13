@@ -9,6 +9,8 @@ wheels/
 # Virtual environments
 .venv
 tests.txt
-screenshots/
-logs/
+screenshots/*
+!screenshots/.gitkeep
+logs/*
+!logs/.gitkeep
 .idea
