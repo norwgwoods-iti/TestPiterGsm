@@ -55,7 +55,7 @@ class TestBuyProduct:
 
 
     @allure.title('Check Buy Marshall')
-    # @pytest.mark.smoke
+    @pytest.mark.critical_path
     def test_buy_product_marshall(self, set_up):
 
         driver = set_up
