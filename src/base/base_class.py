@@ -29,6 +29,12 @@ class Base:
         get_url = unquote(get_url)
         return f'current URL: {get_url}'
 
+    """ Method get Title Category """
+    def get_title_category(self):
+        catalog_title_xpath = '//h1[@class="catalog__title"]'
+        catalog_title = self.wait.until(ec.visibility_of_element_located((By.XPATH, catalog_title_xpath))).text
+        return catalog_title
+
 
     """ Method Get Titles Product """
     def get_product_titles(self, product_titles_list_xpath):
@@ -56,6 +62,11 @@ class Base:
     def assert_word(self, expected_word, current_word):
         assert expected_word.lower() == current_word.text.lower()
         print('Success assert word')
+
+    """Method assert title"""
+    def assert_title(self, expected_title):
+        assert expected_title.lower() == self.get_title_category().lower()
+        print('Success assert title')
 
     """Method assert URL"""
     def assert_url(self, expected_url):

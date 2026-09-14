@@ -47,6 +47,12 @@ class MainPage(Base):
     search_button_xpath = '//button[@class="searchbox__btn"]'
 
 
+    @staticmethod
+    def menu_category_button_xpath(category: str):
+        return f'//a[@class="hcat__link js_hcat-sub-trigger"][contains(text(), "{category}")]'
+
+
+
     # Getters
 
     """Cookie"""

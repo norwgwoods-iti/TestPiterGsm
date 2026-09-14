@@ -13,8 +13,8 @@ class TestPiterGsm:
     base_url = 'https://pitergsm.ru/'
 
     @allure.title('Check Open Main Page')
-    def test_main_page_title(self, set_up):
-        driver = set_up
+    def test_main_page_title(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test Open Main Page')
@@ -25,8 +25,8 @@ class TestPiterGsm:
 
     @allure.title('Check Search Valid Product')
     @pytest.mark.parametrize('product_name', ['iPhone 15 256', 'Marshall'])
-    def test_search_valid_product(self, set_up, product_name):
-        driver = set_up
+    def test_search_valid_product(self, driver, product_name):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test Search Valid Product')
@@ -40,8 +40,8 @@ class TestPiterGsm:
 
     @allure.title('Check Search Invalid Product (Negative)')
     @pytest.mark.negative
-    def test_search_invalid_product(self, set_up):
-        driver = set_up
+    def test_search_invalid_product(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test Search Invalid Product (Negative)')

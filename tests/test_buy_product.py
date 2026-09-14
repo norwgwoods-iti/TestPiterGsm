@@ -19,8 +19,8 @@ class TestBuyProduct:
 
     @allure.title('Check Buy Imac')
     @pytest.mark.critical_path
-    def test_buy_product_imac(self, set_up):
-        driver = set_up
+    def test_buy_product_imac(self, driver):
+        driver = driver
 
         driver.get(self.base_url)
 
@@ -56,9 +56,9 @@ class TestBuyProduct:
 
     @allure.title('Check Buy Marshall')
     @pytest.mark.critical_path
-    def test_buy_product_marshall(self, set_up):
+    def test_buy_product_marshall(self, driver):
 
-        driver = set_up
+        driver = driver
 
         driver.get(self.base_url)
 

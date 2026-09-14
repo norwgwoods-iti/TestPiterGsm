@@ -27,8 +27,8 @@ class TestCatalog:
             'existing_product'
         ]
         )
-    def test_send_search(self, set_up, product_name):
-        driver = set_up
+    def test_send_search(self, driver, product_name):
+        driver = driver
         driver.get(self.base_url)
 
         print(f'Test - Search "{product_name}"')
@@ -48,8 +48,8 @@ class TestCatalog:
             'non_existing_product',
         ],
         )
-    def test_send_search_non_existing_product(self, set_up, product_name):
-        driver = set_up
+    def test_send_search_non_existing_product(self, driver, product_name):
+        driver = driver
         driver.get(self.base_url)
 
         print(f'Test - Search "{product_name}"')
@@ -62,8 +62,8 @@ class TestCatalog:
 
     @allure.title("Open Mac category")
     @pytest.mark.regression
-    def test_open_mac_category(self, set_up):
-        driver = set_up
+    def test_open_mac_category(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test - Open Mac category')
@@ -76,8 +76,8 @@ class TestCatalog:
 
     @allure.title("Open Audio category")
     @pytest.mark.regression
-    def test_open_audio_category(self, set_up):
-        driver = set_up
+    def test_open_audio_category(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test - Open Audio category')
@@ -90,8 +90,8 @@ class TestCatalog:
 
     @allure.title("Open iMac category")
     @pytest.mark.regression
-    def test_open_imac_category(self, set_up):
-        driver = set_up
+    def test_open_imac_category(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test - Open iMac category')
@@ -108,8 +108,8 @@ class TestCatalog:
     @allure.title("Open headphones category")
     @pytest.mark.regression
     @pytest.mark.parametrize('category_audio', ['Наушники', 'Микрофон'])
-    def test_open_headphones_category(self, set_up, category_audio):
-        driver = set_up
+    def test_open_headphones_category(self, driver, category_audio):
+        driver = driver
         driver.get(self.base_url)
 
         print(f'Test - Open "{category_audio}" category')
@@ -126,8 +126,8 @@ class TestCatalog:
     @allure.title("Filter iMac by 512GB")
     @pytest.mark.regression
     @pytest.mark.parametrize('data_memory_size', ['512GB', '256GB'])
-    def test_filter_imac_by_memory(self, set_up, data_memory_size):
-        driver = set_up
+    def test_filter_imac_by_memory(self, driver, data_memory_size):
+        driver = driver
         driver.get(self.base_url)
 
         print(f'Test - Filter iMac by {data_memory_size}')
@@ -146,8 +146,8 @@ class TestCatalog:
 
     @allure.title("Add iMac to cart")
     @pytest.mark.regression
-    def test_add_imac_to_cart(self, set_up):
-        driver = set_up
+    def test_add_imac_to_cart(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test - Add iMac to cart')
@@ -178,8 +178,8 @@ class TestCatalog:
         ]
 
     )
-    def test_filter_headphones_by_brand(self, set_up, filter_brand):
-        driver = set_up
+    def test_filter_headphones_by_brand(self, driver, filter_brand):
+        driver = driver
         driver.get(self.base_url)
 
         print(f'Test - Filter "Наушники" by "{filter_brand}"')
@@ -206,8 +206,8 @@ class TestCatalog:
 
     @allure.title("Open checkout page")
     @pytest.mark.regression
-    def test_checkout_page(self, set_up):
-        driver = set_up
+    def test_checkout_page(self, driver):
+        driver = driver
         driver.get(self.base_url)
 
         print('Test - Open checkout page')
