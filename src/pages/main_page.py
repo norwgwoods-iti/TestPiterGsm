@@ -176,6 +176,6 @@ class MainPage(Base):
 
             self.assert_url(expected_url=MainPage.expected_search_url(product_name))
 
-            self.assertion_products_title(key_word=product_name, product_titles_list_xpath=self.product_titles_xpath)
+            self.assertion_products_title(key_word=product_name, product_titles_list=self.product_titles_xpath)
 
             Logger.add_end_method(current_url=self.get_current_url(), method='search_product')

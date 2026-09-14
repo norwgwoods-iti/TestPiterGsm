@@ -198,7 +198,7 @@ class TestCatalog:
 
         headphones_page.assertion_products_title(
             key_word=filter_brand,
-            product_titles_list_xpath=headphones_page.product_titles_xpath
+            product_titles_list=headphones_page.product_titles_xpath
         )
 
         headphones_page.get_screenshot()
@@ -222,7 +222,7 @@ class TestCatalog:
         headphones_page = HeadphonePage(driver)
         filter_brand_apple = 'Apple'
         headphones_page.filter_and_add_headphones_to_cart(filter_brand=filter_brand_apple)
-        headphones_page.assertion_products_title(key_word=filter_brand_apple, product_titles_list_xpath=headphones_page.product_titles_xpath)
+        headphones_page.assertion_products_title(key_word=filter_brand_apple, product_titles_list=headphones_page.product_titles_xpath)
 
         cart_page = CartPage(driver)
         cart_page.select_order()
