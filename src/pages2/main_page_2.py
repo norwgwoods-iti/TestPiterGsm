@@ -13,7 +13,8 @@ class MainPage(Base):
         super().__init__(driver)
         self.base_url = 'https://pitergsm.ru/'
 
-    # Locators
+
+    # LOCATORS ________________________________________________________________________________________
 
     @staticmethod
     def menu_catalog_button_xpath(catalog: str):
@@ -21,35 +22,69 @@ class MainPage(Base):
 
     cookie_button = '//button[@id="cookie-consent-btn"]'
 
-    # Getters
+
+    """ Check (Asserts) """
+    expected_main_logo_src = 'https://pitergsm.ru/local/templates/main/assets/img/pitergsm_color_c.svg'
+
+    main_logo_xpath = '//img[@class="header__logo-img"]'
+
+    # GETTERS ________________________________________________________________________________________
 
     def get_menu_catalog_button(self, catalog: str):
         print(f'Click Menu catalog Button - "{catalog}"')
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.menu_catalog_button_xpath(catalog))))
 
-    """Cookie"""
-
+    """ Cookie """
     def get_cookie_button(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.cookie_button)))
 
-    # Actions
+
+    """ Check (Asserts) """
+    def get_src_main_logo(self):
+        title_src_image = self.wait.until(ec.visibility_of_element_located((By.XPATH, self.main_logo_xpath)))
+        return title_src_image.get_attribute('src')
+
+
+    # ACTIONS ________________________________________________________________________________________
 
     def click_menu_catalog_button(self, catalog: str):
         self.driver.execute_script('arguments[0].click();', self.get_menu_catalog_button(catalog))
         print(f'Select catalog: "{catalog}"')
 
-    """Cookie"""
+    """ Cookie """
     def click_cookie_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_cookie_button())
         print('Click Cookie Button')
 
-    # Methods
+
+    """ Check (Asserts) """
+    def assert_main_logo(self):
+        assert self.get_src_main_logo() == self.expected_main_logo_src
+        print('Success Assert main logo')
+
+    # METHODS ________________________________________________________________________________________
 
 
     def open_url(self):
-        self.driver.get(self.base_url)
-        self.click_cookie_button()
+        with allure.step('Open main page'):
+            Logger.add_start_method(method='open_main_page')
+
+            self.driver.get(self.base_url)
+            self.click_cookie_button()
+
+            self.assert_url(expected_url=self.base_url)
+            self.assert_main_logo()
+
+            Logger.add_end_method(method='open_main_page', current_url=self.get_current_url())
+
+
 
     def select_menu_catalog(self, catalog: str):
-        self.click_menu_catalog_button(catalog)
-        self.assert_title(expected_title=catalog)
+        with allure.step(f'Select catalog: "{catalog}"'):
+            Logger.add_start_method(method='select_catalog')
+
+            self.click_menu_catalog_button(catalog)
+
+            self.assert_title(expected_title=catalog)
+
+            Logger.add_end_method(method='select_catalog', current_url=self.get_current_url())

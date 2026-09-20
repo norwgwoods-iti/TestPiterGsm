@@ -17,16 +17,36 @@ class CategoryPage(Base):
     def button_category_xpath(category):
         return f'//a[@class=" tags__tag"][(text()="{category}")]'
 
+    """Add to cart"""
+    add_to_cart_button_xpath = '(//button[@class="prodcard__btn btn btn_cta buy_link is_init"])[1]'
+    cart_button_xpath = '//a[@class="btn btn_cta"]'
 
     # Getters
     def get_button_category(self, category):
         return self.wait.until((ec.element_to_be_clickable((By.XPATH, self.button_category_xpath(category)))))
+
+
+    """Add to cart"""
+    def get_add_to_cart_button(self):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.add_to_cart_button_xpath)))
+
+    def get_cart_button(self):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.cart_button_xpath)))
 
     # Actions
     def click_button_category(self, category):
         self.driver.execute_script('arguments[0].click();', self.get_button_category(category))
         print(f'Select category: "{category}"')
 
+
+    """Add to cart"""
+    def click_add_to_cart_button(self):
+        self.driver.execute_script('arguments[0].click();', self.get_add_to_cart_button())
+        print('Click add cart button')
+
+    def click_cart_button(self):
+        self.driver.execute_script('arguments[0].click();', self.get_cart_button())
+        print('Click cart')
 
     # Methods
 
@@ -37,3 +57,10 @@ class CategoryPage(Base):
             key_word=category,
             product_titles_list=self.get_product_titles(self.product_titles_xpath))
 
+
+
+    def add_product_to_cart(self):
+        self.click_add_to_cart_button()
+        self.click_cart_button()
+
+        # assert

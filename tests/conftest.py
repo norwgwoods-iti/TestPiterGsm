@@ -25,7 +25,7 @@ def driver(request):
         options = ChromeOptions()
         # options.add_experimental_option("detach", True)
         options.add_argument('guest')
-        options.add_argument('--headless=new')
+        # options.add_argument('--headless=new')
 
         driver = webdriver.Chrome(options=options)
 
@@ -44,6 +44,6 @@ def driver(request):
     yield driver
 
     print("Quit Browser")
-    # time.sleep(5)
+    time.sleep(10)
     driver.quit()
     print("Finish Test")

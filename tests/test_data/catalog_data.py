@@ -5,8 +5,8 @@ from src.pages2.iphone_page import IphonePage
 
 
 CATALOG = [
-    ('iPhone',IphonePage),
-    ('iPad',IpadPage),
+    ('iPhone', IphonePage),
+    ('iPad', IpadPage),
     ('Mac', MacPage),
     ('Аудио', AudioPage)
 ]
@@ -30,8 +30,11 @@ CATALOG = [
 #     ('Электроника', ''),
 # ]
 
-CATEGORIES = [
-    ''
+IPHONE_TEST_DATA = [
+    ('iPhone 17', '256GB', 'Фиолетовый'),
+    # ('iPhone 17', '512GB', ''),
+    # ('iPhone 18 Pro Max', '256GB', 'Бургунди'),
+    # ('iPhone 18 Pro Max', '512GB', 'Голубой'),
 ]
 
 
