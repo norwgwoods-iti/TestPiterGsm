@@ -19,8 +19,8 @@ class Base:
         self.actions = ActionChains(self.driver)
 
 
-    product_titles_xpath = '//a[@class="prodcard__name"]'
-    catalog_title_xpath = '//h1[@class="catalog__title"]'
+    # product_titles_xpath = '//a[@class="prodcard__name"]'
+    # catalog_title_xpath = '//h1[@class="catalog__title"]'
 
 
     """Method get current URL"""
@@ -45,11 +45,12 @@ class Base:
             titles.append(title.text)
         return titles
 
-
-    def assertion_products_title(self, key_word: str | list, product_titles_list_xpath: str):
-        titles = self.get_product_titles(product_titles_list_xpath)
+    @staticmethod
+    def assertion_products_title(key_word: str | list, product_titles_list: str | list):
+        titles = product_titles_list
         assert len(titles) > 0
-        assert any(key_word.lower() in title.lower() for title in titles)
+        for key in key_word:
+            assert any(key.lower() in title.lower() for title in titles)
         print('Search product success')
 
 
@@ -91,6 +92,8 @@ class Base:
             Logger.write_log_to_file(f"INFO: {name_element} not available, switching to alternative.\n")
             return False
 
+
+
     """Method for visible/invisible filter button"""
     show_filter_button_xpath = '//label[@class="catalog__filter-trigger"]'
 
@@ -109,3 +112,84 @@ class Base:
         if self.is_show_filter_button_visible():
             self.driver.execute_script('arguments[0].click();', self.get_filter_button())
             print('Click filter button')
+
+
+
+
+
+    """ Method Filtration """
+    # Locators
+    filter_color_dropdown_xpath = '//span[@class="filter__title"][contains(text(), "Цвет")]'
+
+    @staticmethod
+    def filter_set_color_xpath(color):
+        return f'//label[@data-tooltip="{color}"]'
+
+    filter_confirm_xpath = '//button[@id="modef"]'
+
+    # Getters
+
+    def get_filter_memory(self, memory: str | None = None):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//label[@data-tooltip="{memory}"]')))
+
+
+    def get_filter_ram(self, ram: str | None = None):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//span[contains(text(), "{ram}")]')))
+
+
+    def get_filter_color_dropdown(self):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_color_dropdown_xpath)))
+
+
+    def get_filter_color(self, color: str | None = None):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_set_color_xpath(color))))
+
+
+    def get_filter_confirm(self):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_confirm_xpath)))
+
+    # Actions
+
+    def click_filter_memory(self, memory: str | None = None):
+        if not memory:
+            return
+        self.driver.execute_script('arguments[0].click();', self.get_filter_memory(memory))
+        print('Click filter memory')
+
+    def click_filter_ram(self, ram: str | None = None):
+        if not ram:
+            return
+        self.driver.execute_script('arguments[0].click();', self.get_filter_ram(ram))
+        print('Click filter ram')
+
+    def click_filter_color_dropdown(self):
+        self.driver.execute_script('arguments[0].click();', self.get_filter_color_dropdown())
+        print('Click filter color dropdown')
+
+    def click_filter_color(self, color: str | None = None):
+        if not color:
+            return
+        self.driver.execute_script('arguments[0].click();', self.get_filter_color(color))
+        print('Click filter color')
+
+    def click_filter_confirm(self):
+        self.driver.execute_script('arguments[0].click();', self.get_filter_confirm())
+        print('Click filter confirm')
+
+    # Methods
+
+    def set_color(self, color: str | None = None):
+        self.click_filter_color_dropdown()
+        self.click_filter_color(color)
+
+
+    def filter_product(
+            self,
+            memory: str | None = None,
+            ram: str | None = None,
+            color: str | None = None,):
+        self.click_filter_button_if_visible()
+        self.click_filter_memory(memory)
+        self.click_filter_ram(ram)
+        self.set_color(color)
+        self.click_filter_confirm()
