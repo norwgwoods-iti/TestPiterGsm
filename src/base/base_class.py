@@ -18,12 +18,14 @@ class Base:
         self.wait = WebDriverWait(driver, 3)
         self.actions = ActionChains(self.driver)
 
+        self.base_url = 'https://pitergsm.ru/'
+
 
     # product_titles_xpath = '//a[@class="prodcard__name"]'
     # catalog_title_xpath = '//h1[@class="catalog__title"]'
 
 
-    """Method get current URL"""
+    """ Method get current URL """
     def get_current_url(self):
         get_url = self.driver.current_url
         get_url = unquote(get_url)
@@ -68,27 +70,27 @@ class Base:
 
 
 
-    """Method assert price"""
+    """ Method assert price """
     def assert_price(self, expected_price, current_price):
         assert expected_price.text.replace(' ','').rstrip('₽') == current_price.text.replace(' ','').rstrip('₽')
         print('Success assert price')
 
-    """Method assert word"""
+    """ Method assert word """
     def assert_word(self, expected_word, current_word):
         assert expected_word.lower() == current_word.text.lower()
         print('Success assert word')
 
-    """Method assert title"""
+    """ Method assert title """
     def assert_title(self, expected_title):
         assert expected_title.lower() == self.get_title_category().lower()
         print('Success assert title')
 
-    """Method assert URL"""
+    """ Method assert URL """
     def assert_url(self, expected_url):
         assert expected_url == unquote(self.driver.current_url), 'Error assert URL'
         print('Success assert URL')
 
-    """Method Screenshot"""
+    """ Method Screenshot """
     def get_screenshot(self):
         now_date = datetime.now().strftime("%Y.%m.%d %H-%M-%S")
         screenshot_name = f'screenshot ({now_date}).png'
@@ -97,7 +99,7 @@ class Base:
         self.driver.save_screenshot(f'{current_dir}/{screenshot_name}')
         print(f'Screenshot Saved: {screenshot_name}')
 
-    """Method is visible element"""
+    """ Method is visible element """
     def is_element_visible(self, locator, name_element):
         try:
             self.wait.until(ec.visibility_of_element_located((By.XPATH, locator)))

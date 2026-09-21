@@ -6,26 +6,26 @@ from base.base_class import Base
 from utilities.logger import Logger
 
 
-class CategoryPage(Base):
+class CatalogPage(Base):
     def __init__(self, driver):
         super().__init__(driver)
-        self.category_title_xpath = '//h1[@class="catalog__title"]'
+        self.catalog_title_xpath = '//h1[@class="catalog__title"]'
         self.product_titles_xpath = '//a[@class="prodcard__name"]'
 
 
-    # Locators
+    # LOCATORS ________________________________________________________________________________
 
     @staticmethod
-    def button_category_xpath(category):
-        return f'//a[@class=" tags__tag"][(text()="{category}")]'
+    def button_catalog_xpath(catalog):
+        return f'//a[@class=" tags__tag"][(text()="{catalog}")]'
 
     """Add to cart"""
     add_to_cart_button_xpath = '(//button[@class="prodcard__btn btn btn_cta buy_link is_init"])[1]'
     cart_button_xpath = '//a[@class="btn btn_cta"]'
 
     # Getters
-    def get_button_category(self, category):
-        return self.wait.until((ec.element_to_be_clickable((By.XPATH, self.button_category_xpath(category)))))
+    def get_button_catalog(self, catalog):
+        return self.wait.until((ec.element_to_be_clickable((By.XPATH, self.button_catalog_xpath(catalog)))))
 
 
     """Add to cart"""
@@ -35,10 +35,13 @@ class CategoryPage(Base):
     def get_cart_button(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.cart_button_xpath)))
 
-    # Actions
-    def click_button_category(self, category):
-        self.driver.execute_script('arguments[0].click();', self.get_button_category(category))
-        print(f'Select category: "{category}"')
+
+    # ACTIONS ________________________________________________________________________________
+
+
+    def click_button_catalog(self, catalog):
+        self.driver.execute_script('arguments[0].click();', self.get_button_catalog(catalog))
+        print(f'Select catalog: "{catalog}"')
 
 
     """Add to cart"""
@@ -50,17 +53,19 @@ class CategoryPage(Base):
         self.driver.execute_script('arguments[0].click();', self.get_cart_button())
         print('Click cart')
 
-    # Methods
 
-    def select_menu_category(self, category: str):
-        with allure.step(f'Select menu category: "{category}"'):
-            Logger.add_start_method(method='select_menu_category')
-            self.click_button_category(category)
-            self.assert_title(expected_title=category)
+    # METHODS ________________________________________________________________________________
+
+
+    def select_product_in_menu_catalog(self, catalog: str):
+        with allure.step(f'Select menu catalog: "{catalog}"'):
+            Logger.add_start_method(method='select_menu_catalog')
+            self.click_button_catalog(catalog)
+            self.assert_title(expected_title=catalog)
             self.assertion_products_title(
-                key_word=category,
+                key_word=catalog,
                 product_titles_list=self.get_product_titles(self.product_titles_xpath))
-            Logger.add_end_method(current_url=self.get_current_url(), method='select_menu_category')
+            Logger.add_end_method(current_url=self.get_current_url(), method='select_menu_catalog')
 
 
 

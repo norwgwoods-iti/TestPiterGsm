@@ -138,8 +138,9 @@ class OrderPage(Base):
 
     """ Choice Preparation Method """
     def click_preparation_method_button(self, preparation):
-        time.sleep(1)
         self.driver.execute_script('arguments[0].click();', self.get_preparation_method_button(preparation))
+        time.sleep(1)
+        print('Click preparation method')
 
 
     """ Input Delivery Info (Address) """
@@ -147,28 +148,37 @@ class OrderPage(Base):
         self.get_input_city_address().send_keys(ORDER_CONTACT_INFO['city_address'])
         self.get_input_city_address().send_keys(Keys.ARROW_DOWN)
         self.get_input_city_address().send_keys(Keys.RETURN)
+        print('Input city address')
     def input_entrance(self):
         self.get_input_entrance().send_keys(ORDER_CONTACT_INFO['entrance'])
+        print('Input entrance')
     def input_floor(self):
         self.get_input_floor().send_keys(ORDER_CONTACT_INFO['floor'])
+        print('Input floor')
     def input_apartment(self):
         self.get_input_apartment().send_keys(ORDER_CONTACT_INFO['apartment'])
+        print('Input apartment')
+
 
     def click_address_confirm_button(self):
         time.sleep(1)
         self.driver.execute_script('arguments[0].click();', self.get_address_confirm_button())
         print('Click address confirm button')
 
+
     """ Set datetime delivery """
     def click_day_to_delivery_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_day_to_delivery_button())
+        print('Click day to delivery button')
     def click_choice_time_delivery_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_choice_time_delivery_button())
+        print('Click choice time delivery button')
 
 
     """ Pay """
     def click_payment_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_payment_button())
+        print('Click Pay button')
 
 
     """ Checkout """
@@ -182,9 +192,10 @@ class OrderPage(Base):
     """ Confirm order """
     def click_confirm_order_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_confirm_order_button())
+        print('Click Confirm order')
 
 
-    # METHODS
+    # METHODS _____________________________________________________________________
 
     """Input Contact Info"""
     def input_contact_info(self):

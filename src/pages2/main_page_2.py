@@ -1,8 +1,11 @@
+from urllib.parse import unquote
+
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 import allure
 import time
 
+from tests.test_data.catalog_data import URL_CATALOG
 from src.base.base_class import Base
 from src.utilities.logger import Logger
 from tests.test_data import catalog_data
@@ -11,7 +14,7 @@ from tests.test_data import catalog_data
 class MainPage(Base):
     def __init__(self, driver):
         super().__init__(driver)
-        self.base_url = 'https://pitergsm.ru/'
+
 
 
     # LOCATORS ________________________________________________________________________________________
@@ -65,16 +68,17 @@ class MainPage(Base):
     # METHODS ________________________________________________________________________________________
 
 
+    def get_url_catalog(self, catalog):
+         return f'{self.base_url}catalog/{URL_CATALOG[catalog]}/'
+
+
     def open_url(self):
         with allure.step('Open main page'):
             Logger.add_start_method(method='open_main_page')
-
             self.driver.get(self.base_url)
             self.click_cookie_button()
-
             self.assert_url(expected_url=self.base_url)
             self.assert_main_logo()
-
             Logger.add_end_method(method='open_main_page', current_url=self.get_current_url())
 
 
@@ -82,9 +86,7 @@ class MainPage(Base):
     def select_menu_catalog(self, catalog: str):
         with allure.step(f'Select catalog: "{catalog}"'):
             Logger.add_start_method(method='select_catalog')
-
             self.click_menu_catalog_button(catalog)
-
+            self.assert_url(expected_url=self.get_url_catalog(catalog))
             self.assert_title(expected_title=catalog)
-
             Logger.add_end_method(method='select_catalog', current_url=self.get_current_url())
