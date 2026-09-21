@@ -1,7 +1,9 @@
+import allure
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class CategoryPage(Base):
@@ -51,11 +53,14 @@ class CategoryPage(Base):
     # Methods
 
     def select_menu_category(self, category: str):
-        self.click_button_category(category)
-        self.assert_title(expected_title=category)
-        self.assertion_products_title(
-            key_word=category,
-            product_titles_list=self.get_product_titles(self.product_titles_xpath))
+        with allure.step(f'Select menu category: "{category}"'):
+            Logger.add_start_method(method='select_menu_category')
+            self.click_button_category(category)
+            self.assert_title(expected_title=category)
+            self.assertion_products_title(
+                key_word=category,
+                product_titles_list=self.get_product_titles(self.product_titles_xpath))
+            Logger.add_end_method(current_url=self.get_current_url(), method='select_menu_category')
 
 
 
