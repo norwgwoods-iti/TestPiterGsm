@@ -5,7 +5,6 @@ import time
 
 from tests.test_data.catalog_data import URL_CATALOG
 from src.base.base_class import Base
-from src.utilities.logger import Logger
 import logging
 
 logger = logging.getLogger(__name__)
@@ -52,13 +51,13 @@ class MainPage(Base):
     def click_menu_catalog_button(self, catalog: str):
         self.driver.execute_script('arguments[0].click();', self.get_menu_catalog_button(catalog))
         # print(f'Select catalog: "{catalog}"')
-        logger.info(f'Click Menu catalog Button - "%s"',catalog)
+        logger.info('Click Menu catalog Button - "%s"',catalog)
 
 
     """ Cookie """
     def click_cookie_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_cookie_button())
-        logger.info(f'Click Cookie Button')
+        logger.info('Click Cookie Button')
         # print('Click Cookie Button')
 
 
@@ -77,24 +76,22 @@ class MainPage(Base):
 
     def open_url(self):
         with allure.step('Open main page'):
-            # Logger.add_start_method(method='open_main_page')
-            logger.info(f'<-- Start Open main page')
-            self.driver.get(self.base_url)
-            self.click_cookie_button()
-            self.assert_url(expected_url=self.base_url)
-            self.assert_main_logo()
-            logger.info(f'<-- End Open main page. %s', self.get_current_url())
-#             Logger.add_end_method(method='open_main_page', current_url=self.get_current_url())
-
+            logger.info('<-- Start Open main page')
+            try:
+                self.driver.get(self.base_url)
+                self.click_cookie_button()
+                self.assert_url(expected_url=self.base_url)
+                self.assert_main_logo()
+            finally:
+                logger.info('<-- End Open main page. %s', self.get_current_url())
 
 
     def select_menu_catalog(self, catalog: str):
-        with allure.step(f'Select catalog: "{catalog}"'):
-            # Logger.add_start_method(method='select_catalog')
+        with allure.step('Select catalog: "{catalog}"'):
             logger.info('<-- Start Select menu catalog: "%s"', catalog)
-            self.click_menu_catalog_button(catalog)
-            self.assert_url(expected_url=self.get_url_catalog(catalog))
-            self.assert_title(expected_title=catalog)
-            logger.info('<-- End Select menu catalog: "%s".%s', catalog, self.get_current_url())
-
-            # Logger.add_end_method(method='select_catalog', current_url=self.get_current_url())
+            try:
+                self.click_menu_catalog_button(catalog)
+                self.assert_url(expected_url=self.get_url_catalog(catalog))
+                self.assert_title(expected_title=catalog)
+            finally:
+                logger.info('<-- End Select menu catalog: "%s".%s', catalog, self.get_current_url())

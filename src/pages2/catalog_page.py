@@ -3,8 +3,9 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 
 from base.base_class import Base
-from utilities.logger import Logger
+import logging
 
+logger = logging.getLogger(__name__)
 
 class CatalogPage(Base):
     def __init__(self, driver):
@@ -41,17 +42,20 @@ class CatalogPage(Base):
 
     def click_button_catalog(self, catalog):
         self.driver.execute_script('arguments[0].click();', self.get_button_catalog(catalog))
-        print(f'Select catalog: "{catalog}"')
+        logger.info('Select catalog: %s', catalog)
+        # print(f'Select catalog: "{catalog}"')
 
 
     """Add to cart"""
     def click_add_to_cart_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_add_to_cart_button())
-        print('Click add cart button')
+        logger.info('Click Add to_cart button')
+        # print('Click add cart button')
 
     def click_cart_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_cart_button())
-        print('Click cart')
+        logger.info('Click cart button')
+        # print('Click cart')
 
 
     # METHODS ________________________________________________________________________________
@@ -59,18 +63,22 @@ class CatalogPage(Base):
 
     def select_product_in_menu_catalog(self, catalog: str):
         with allure.step(f'Select menu catalog: "{catalog}"'):
-            Logger.add_start_method(method='select_menu_catalog')
+            # Logger.add_start_method(method='select_menu_catalog')
+            logger.info('<-- Start Select menu catalog: %s', catalog)
             self.click_button_catalog(catalog)
             self.assert_title(expected_title=catalog)
             self.assertion_products_title(
                 key_word=catalog,
                 product_titles_list=self.get_product_titles(self.product_titles_xpath))
-            Logger.add_end_method(current_url=self.get_current_url(), method='select_menu_catalog')
-
+            # Logger.add_end_method(current_url=self.get_current_url(), method='select_menu_catalog')
+            logger.info('<-- End Select menu catalog: %s. %s', catalog, self.get_current_url())
 
 
     def add_product_to_cart(self):
-        self.click_add_to_cart_button()
-        self.click_cart_button()
+        with allure.step('Add product to cart'):
+            logger.info('<-- Start Add product to cart')
+            self.click_add_to_cart_button()
+            self.click_cart_button()
+            logger.info('<-- End Add product to cart. %s', self.get_current_url())
 
         # assert

@@ -2,7 +2,9 @@ import allure
 
 from base.filter_class import Filter
 from src.pages2.catalog_page import CatalogPage
-from utilities.logger import Logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class IphonePage(CatalogPage):
@@ -20,10 +22,10 @@ class IphonePage(CatalogPage):
             color: str | None = None,
     ):
         with allure.step('Filter iPhone'):
-            Logger.add_start_method(method='filter_iphone')
+            logger.info('<-- Start Filter iPhone')
             non_empty_args = self.get_arguments_non_empty(locals())
 
-            print(non_empty_args)
+            logger.info(non_empty_args)
 
             self.filter.click_filter_button_if_visible()
             self.filter.click_filter_memory(memory)
@@ -31,5 +33,5 @@ class IphonePage(CatalogPage):
             self.filter.set_color(color)
             self.filter.click_filter_confirm()
             self.assertion_products_title(key_word=non_empty_args, product_titles_list=self.get_product_titles(self.product_titles_xpath))
-            Logger.add_end_method(current_url=self.get_current_url(),method='filter_iphone')
+            logger.info('<-- End Filter iPhone. %s', self.get_current_url())
 

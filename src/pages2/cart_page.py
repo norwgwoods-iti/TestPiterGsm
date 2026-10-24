@@ -1,10 +1,13 @@
 from base.base_class import Base
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
+import logging
+
+logger = logging.getLogger(__name__)
 
 class CartPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
+    # def __init__(self, driver):
+    #     super().__init__(driver)
 
     # LOCATORS ___________________________________________________________________________
 
@@ -23,7 +26,8 @@ class CartPage(Base):
 
     def click_order_button(self):
         self.driver.execute_script("arguments[0].click();", self.get_order_button())
-        print('Click Order Button')
+        # print('Click Order Button')
+        logger.info('Click Order Button')
 
 
     # METHODS ___________________________________________________________________________
