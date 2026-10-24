@@ -1,12 +1,15 @@
+import logging
+import allure
 from selenium.webdriver.common.by import By
 
 from base.base_class import Base
 from selenium.webdriver.support import expected_conditions as ec
 
+logger = logging.getLogger(__name__)
 
 class Filter(Base):
     """ Method Filtration """
-    # Locators
+    # LOCATORS ________________________________________________________________________________
     filter_color_dropdown_xpath = '//span[@class="filter__title"][contains(text(), "Цвет")]'
 
     @staticmethod
@@ -15,7 +18,7 @@ class Filter(Base):
 
     filter_confirm_xpath = '//button[@id="modef"]'
 
-    # Getters
+    # GETTERS ________________________________________________________________________________
 
     def get_filter_memory(self, memory: str | None = None):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//label[@data-tooltip="{memory}"]')))
@@ -32,47 +35,44 @@ class Filter(Base):
     def get_filter_confirm(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_confirm_xpath)))
 
-    # Actions
+    # ACTIONS ________________________________________________________________________________
 
     def click_filter_memory(self, memory: str | None = None):
         if not memory:
             return
         self.driver.execute_script('arguments[0].click();', self.get_filter_memory(memory))
-        print('Click filter memory')
+        logger.info('Click filter memory')
+        # print('Click filter memory')
 
     def click_filter_ram(self, ram: str | None = None):
         if not ram:
             return
         self.driver.execute_script('arguments[0].click();', self.get_filter_ram(ram))
-        print('Click filter ram')
+        logger.info('Click filter ram')
+        # print('Click filter ram')
 
     def click_filter_color_dropdown(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_color_dropdown())
-        print('Click filter color dropdown')
+        logger.info('Click filter color dropdown')
+        # print('Click filter color dropdown')
 
     def click_filter_color(self, color: str | None = None):
         if not color:
             return
         self.driver.execute_script('arguments[0].click();', self.get_filter_color(color))
-        print('Click filter color')
+        logger.info('Click filter color')
+        # print('Click filter color')
 
     def click_filter_confirm(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_confirm())
-        print('Click filter confirm')
+        logger.info('Click filter confirm')
+        # print('Click filter confirm')
 
-    # Methods
+    # METHODS ________________________________________________________________________________
 
     def set_color(self, color: str | None = None):
-        self.click_filter_color_dropdown()
-        self.click_filter_color(color)
-
-    # def filter_product(
-    #         self,
-    #         memory: str | None = None,
-    #         ram: str | None = None,
-    #         color: str | None = None, ):
-    #     self.click_filter_button_if_visible()
-    #     self.click_filter_memory(memory)
-    #     self.click_filter_ram(ram)
-    #     self.set_color(color)
-    #     self.click_filter_confirm()
+        with allure.step(f'Set color: {color}'):
+            logger.info('<-- Start Set color: %s', color)
+            self.click_filter_color_dropdown()
+            self.click_filter_color(color)
+            logger.info('<-- End Set color: %s', color)

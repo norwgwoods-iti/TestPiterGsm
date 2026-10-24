@@ -9,15 +9,15 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
-from src.utilities.logger import Logger
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Base:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 3)
         self.actions = ActionChains(self.driver)
-
         self.base_url = 'https://pitergsm.ru/'
 
 
@@ -66,29 +66,29 @@ class Base:
         assert len(titles) > 0
         for key in key_word:
             assert any(key.lower() in title.lower() for title in titles)
-        print('Search product success')
-
+        logger.info('Success assertion_products_title')
 
 
     """ Method assert price """
     def assert_price(self, expected_price, current_price):
         assert expected_price.text.replace(' ','').rstrip('₽') == current_price.text.replace(' ','').rstrip('₽')
-        print('Success assert price')
+        logger.info('Success assert price')
 
     """ Method assert word """
     def assert_word(self, expected_word, current_word):
         assert expected_word.lower() == current_word.text.lower()
-        print('Success assert word')
+        logger.info('Success assert word')
 
     """ Method assert title """
     def assert_title(self, expected_title):
         assert expected_title.lower() == self.get_title_category().lower()
-        print('Success assert title')
+        logger.info('Success assert title')
+
 
     """ Method assert URL """
     def assert_url(self, expected_url):
         assert expected_url == unquote(self.driver.current_url), 'Error assert URL'
-        print('Success assert URL')
+        logger.info('Success assert URL')
 
     """ Method Screenshot """
     def get_screenshot(self):
@@ -97,7 +97,7 @@ class Base:
         current_dir = str(Path(__file__).resolve().parent.parent.parent / 'screenshots')
         time.sleep(1)
         self.driver.save_screenshot(f'{current_dir}/{screenshot_name}')
-        print(f'Screenshot Saved: {screenshot_name}')
+        logger.info('Screenshot success')
 
     """ Method is visible element """
     def is_element_visible(self, locator, name_element):
@@ -105,7 +105,7 @@ class Base:
             self.wait.until(ec.visibility_of_element_located((By.XPATH, locator)))
             return True
         except TimeoutException:
-            Logger.write_log_to_file(f"INFO: {name_element} not available, switching to alternative.\n")
+            logger.exception("%s not available, switching to alternative.\n", name_element)
             return False
 
 
@@ -121,13 +121,13 @@ class Base:
             self.wait.until(ec.element_to_be_clickable((By.XPATH, self.show_filter_button_xpath)))
             return True
         except TimeoutException:
-            Logger.write_log_to_file(f'INFO: filter button not visible\n')
+            logger.exception('Filter button not visible\n')
             return False
 
     def click_filter_button_if_visible(self):
         if self.is_show_filter_button_visible():
             self.driver.execute_script('arguments[0].click();', self.get_filter_button())
-            print('Click filter button')
+            logger.info('Filter button success')
 
 
 

@@ -1,5 +1,3 @@
-from urllib.parse import unquote
-
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 import allure
@@ -8,13 +6,14 @@ import time
 from tests.test_data.catalog_data import URL_CATALOG
 from src.base.base_class import Base
 from src.utilities.logger import Logger
-from tests.test_data import catalog_data
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class MainPage(Base):
-    def __init__(self, driver):
-        super().__init__(driver)
-
+    # def __init__(self, driver):
+    #     super().__init__(driver)
 
 
     # LOCATORS ________________________________________________________________________________________
@@ -34,7 +33,7 @@ class MainPage(Base):
     # GETTERS ________________________________________________________________________________________
 
     def get_menu_catalog_button(self, catalog: str):
-        print(f'Click Menu catalog Button - "{catalog}"')
+        # print(f'Click Menu catalog Button - "{catalog}"')
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.menu_catalog_button_xpath(catalog))))
 
     """ Cookie """
@@ -52,18 +51,22 @@ class MainPage(Base):
 
     def click_menu_catalog_button(self, catalog: str):
         self.driver.execute_script('arguments[0].click();', self.get_menu_catalog_button(catalog))
-        print(f'Select catalog: "{catalog}"')
+        # print(f'Select catalog: "{catalog}"')
+        logger.info(f'Click Menu catalog Button - "%s"',catalog)
+
 
     """ Cookie """
     def click_cookie_button(self):
         self.driver.execute_script('arguments[0].click();', self.get_cookie_button())
-        print('Click Cookie Button')
+        logger.info(f'Click Cookie Button')
+        # print('Click Cookie Button')
 
 
     """ Check (Asserts) """
     def assert_main_logo(self):
         assert self.get_src_main_logo() == self.expected_main_logo_src
-        print('Success Assert main logo')
+        logger.info(f'Success assert main logo')
+        # print('Success Assert main logo')
 
     # METHODS ________________________________________________________________________________________
 
@@ -74,19 +77,24 @@ class MainPage(Base):
 
     def open_url(self):
         with allure.step('Open main page'):
-            Logger.add_start_method(method='open_main_page')
+            # Logger.add_start_method(method='open_main_page')
+            logger.info(f'<-- Start Open main page')
             self.driver.get(self.base_url)
             self.click_cookie_button()
             self.assert_url(expected_url=self.base_url)
             self.assert_main_logo()
-            Logger.add_end_method(method='open_main_page', current_url=self.get_current_url())
+            logger.info(f'<-- End Open main page. %s', self.get_current_url())
+#             Logger.add_end_method(method='open_main_page', current_url=self.get_current_url())
 
 
 
     def select_menu_catalog(self, catalog: str):
         with allure.step(f'Select catalog: "{catalog}"'):
-            Logger.add_start_method(method='select_catalog')
+            # Logger.add_start_method(method='select_catalog')
+            logger.info('<-- Start Select menu catalog: "%s"', catalog)
             self.click_menu_catalog_button(catalog)
             self.assert_url(expected_url=self.get_url_catalog(catalog))
             self.assert_title(expected_title=catalog)
-            Logger.add_end_method(method='select_catalog', current_url=self.get_current_url())
+            logger.info('<-- End Select menu catalog: "%s".%s', catalog, self.get_current_url())
+
+            # Logger.add_end_method(method='select_catalog', current_url=self.get_current_url())
