@@ -2,10 +2,13 @@ import allure
 import pytest
 
 from src.pages2.order_page import OrderPage
-from src.pages2.main_page_2 import MainPage
+from src.pages2.main_page import MainPage
 from src.pages2.iphone_page import IphonePage
 from src.pages2.cart_page import CartPage
 from tests.test_data.catalog_data import IPHONE_TEST_DATA
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @allure.epic('Internet-shop PiterGSM')
@@ -17,8 +20,8 @@ class TestMain:
     @pytest.mark.parametrize(
         'catalog, memory_size, color', IPHONE_TEST_DATA,
     )
-    def test_select_catalog(self, driver, catalog:str, memory_size:str, color:str):
-        print(f'Test Buy "{catalog}"')
+    def test_buy_product(self, driver, catalog:str, memory_size:str, color:str):
+        logger.info(f'Test Buy "{catalog}"')
 
         main_page = MainPage(driver)
         main_page.open_url()

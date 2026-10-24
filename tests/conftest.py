@@ -1,49 +1,74 @@
-import time
+import logging
+from datetime import datetime
+from pathlib import Path
 
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
+from src.utilities.test_markers import log_test_start, log_test_end
+
+logger = logging.getLogger(__name__)
+
+LOG_DIR = Path(__file__).resolve().parent.parent / 'logs'
+LOG_DIR.mkdir(exist_ok=True)
+LOG_FILE = LOG_DIR / f'log_{datetime.now():%Y-%m-%d_%H-%M-%S}.log'
+
+
+def pytest_configure(config):
+    file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8')
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(logging.Formatter(
+        '%(asctime)s [%(levelname)8s] (%(name)s:%(lineno)s) -> %(message)s',
+        '%Y-%m-%d %H:%M:%S',
+    ))
+    logging.getLogger().addHandler(file_handler)
+
+
+@pytest.fixture(autouse=True)
+def log_test_markers(request):                              # ← снова без driver
+    log_test_start(request.node.nodeid, request.node.name)
+    yield
+    url = next(
+        (v for k, v in request.node.user_properties if k == 'current_url'),
+        'n/a',
+    )
+    log_test_end(request.node.nodeid, url)
 
 def pytest_addoption(parser):
     parser.addoption(
         '--browser',
         action='store',
         default='chrome',
-        help='Choose browser: chrome or firefox'
+        help='Choose browser: chrome or firefox',
     )
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope='function')
 def driver(request):
-    name_browser = request.config.getoption("--browser")
+    name_browser = request.config.getoption('--browser')
+    logger.info('Start Test in %s', name_browser.capitalize())
 
-    if name_browser == "chrome":
-        print('Start Test in Chrome')
-
+    if name_browser == 'chrome':
         options = ChromeOptions()
-        # options.add_experimental_option("detach", True)
-        options.add_argument('guest')
-        # options.add_argument('--headless=new')
-
+        options.add_argument('--guest')
+        options.add_argument('--headless=new')
         driver = webdriver.Chrome(options=options)
-
-    elif name_browser == "firefox":
-        print('Start Test in Firefox')
-
+    elif name_browser == 'firefox':
         options = FirefoxOptions()
-        options.add_argument("-headless")
-
+        options.add_argument('-headless')
         driver = webdriver.Firefox(options=options)
     else:
-        raise pytest.UsageError(
-            '--browser must be chrome or firefox'
-        )
+        raise pytest.UsageError('--browser must be chrome or firefox')
 
     yield driver
 
-    print("Quit Browser")
-    time.sleep(10)
+    try:
+        request.node.user_properties.append(('current_url', driver.current_url))
+    except Exception:
+        pass
+
     driver.quit()
-    print("Finish Test")
+    logger.info('Quit Browser')
+    logger.info('Finish Test in %s', name_browser.capitalize())
