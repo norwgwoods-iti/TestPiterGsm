@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 from pathlib import Path
+from src.utilities.logging_config import setup_logging
 
 import pytest
 from selenium import webdriver
@@ -12,18 +13,11 @@ from src.utilities.test_markers import log_test_start, log_test_end
 logger = logging.getLogger(__name__)
 
 LOG_DIR = Path(__file__).resolve().parent.parent / 'logs'
-LOG_DIR.mkdir(exist_ok=True)
-LOG_FILE = LOG_DIR / f'log_{datetime.now():%Y-%m-%d_%H-%M-%S}.log'
-
 
 def pytest_configure(config):
-    file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8')
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s [%(levelname)8s] (%(name)s:%(lineno)s) -> %(message)s',
-        '%Y-%m-%d %H:%M:%S',
-    ))
-    logging.getLogger().addHandler(file_handler)
+    log_file_path = setup_logging(LOG_DIR)
+
+    print(f'Logging to {log_file_path}')
 
 
 @pytest.fixture(autouse=True)
