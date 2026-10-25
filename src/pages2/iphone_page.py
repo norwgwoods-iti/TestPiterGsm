@@ -17,21 +17,28 @@ class IphonePage(CatalogPage):
     """ Filter iPhone """
     def filter_iphone(
             self,
-            memory: str | None = None,
+            *,
+            memory_size: str | None = None,
             ram: str | None = None,
             color: str | None = None,
     ):
         with allure.step('Filter iPhone'):
             logger.info('<-- Start Filter iPhone')
-            non_empty_args = self.get_arguments_non_empty(locals())
-
-            logger.info(non_empty_args)
-
+            filters = [
+                (memory_size, self.filter.click_filter_memory),
+                (ram, self.filter.click_filter_ram),
+                (color, self.filter.set_color),
+            ]
             self.filter.click_filter_button_if_visible()
-            self.filter.click_filter_memory(memory)
-            self.filter.click_filter_ram(ram)
-            self.filter.set_color(color)
+            for value, apply_filter in filters:
+                if value:
+                    apply_filter(value)
             self.filter.click_filter_confirm()
-            self.assertion_products_title(key_word=non_empty_args, product_titles_list=self.get_product_titles(self.product_titles_xpath))
+
+            applied = [value for value, _ in filters if value]
+            self.assertion_products_title(
+                key_word=applied,
+                product_title=self.get_product_title(self.product_title_xpath)
+            )
             logger.info('<-- End Filter iPhone. %s', self.get_current_url())
 

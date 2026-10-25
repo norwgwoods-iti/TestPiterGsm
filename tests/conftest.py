@@ -1,4 +1,5 @@
 import logging
+import time
 from datetime import datetime
 from pathlib import Path
 from src.utilities.logging_config import setup_logging
@@ -62,7 +63,7 @@ def driver(request):
         request.node.user_properties.append(('current_url', driver.current_url))
     except Exception:
         pass
-
+    time.sleep(8)
     driver.quit()
     logger.info('Quit Browser')
     logger.info('Finish Test in %s', name_browser.capitalize())

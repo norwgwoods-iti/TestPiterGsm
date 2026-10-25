@@ -15,6 +15,7 @@ def _unescape_pytest_id(s: str) -> str:
         return chr(int(hex_val, 16))
     return _ESCAPE_RE.sub(repl, s)
 
+
 def log_test_start(method: str, test_name: str | None = None):
     test_name = test_name or method           # ← если не передали, берём method
     logger.info(

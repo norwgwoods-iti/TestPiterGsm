@@ -11,7 +11,7 @@ class CatalogPage(Base):
     def __init__(self, driver):
         super().__init__(driver)
         self.catalog_title_xpath = '//h1[@class="catalog__title"]'
-        self.product_titles_xpath = '//a[@class="prodcard__name"]'
+        self.product_title_xpath = '(//a[@class="prodcard__name"])[1]'
 
 
     # LOCATORS ________________________________________________________________________________
@@ -69,7 +69,7 @@ class CatalogPage(Base):
             self.assert_title(expected_title=catalog)
             self.assertion_products_title(
                 key_word=catalog,
-                product_titles_list=self.get_product_titles(self.product_titles_xpath))
+                product_title=self.get_product_title(self.product_title_xpath))
             # Logger.add_end_method(current_url=self.get_current_url(), method='select_menu_catalog')
             logger.info('<-- End Select menu catalog: %s. %s', catalog, self.get_current_url())
 

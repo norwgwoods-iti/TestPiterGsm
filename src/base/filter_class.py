@@ -32,6 +32,9 @@ class Filter(Base):
     def get_filter_color(self, color: str | None = None):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_set_color_xpath(color))))
 
+    def get_filter_screen_size(self, screen_size: float | str | None = None):
+        return self.wait.until(ec.element_to_be_clickable((By.XPATH, f'//label[@data-tooltip="{screen_size}"]')))
+
     def get_filter_confirm(self):
         return self.wait.until(ec.element_to_be_clickable((By.XPATH, self.filter_confirm_xpath)))
 
@@ -41,14 +44,14 @@ class Filter(Base):
         if not memory:
             return
         self.driver.execute_script('arguments[0].click();', self.get_filter_memory(memory))
-        logger.info('Click filter memory')
+        logger.info('Click filter memory %s', memory)
         # print('Click filter memory')
 
     def click_filter_ram(self, ram: str | None = None):
         if not ram:
             return
         self.driver.execute_script('arguments[0].click();', self.get_filter_ram(ram))
-        logger.info('Click filter ram')
+        logger.info('Click filter ram %s', ram)
         # print('Click filter ram')
 
     def click_filter_color_dropdown(self):
@@ -60,8 +63,14 @@ class Filter(Base):
         if not color:
             return
         self.driver.execute_script('arguments[0].click();', self.get_filter_color(color))
-        logger.info('Click filter color')
+        logger.info('Click filter color %s', color)
         # print('Click filter color')
+
+    def click_filter_screen_size(self, screen_size: float | str | None = None):
+        if not screen_size:
+            return
+        self.driver.execute_script('arguments[0].click();', self.get_filter_screen_size(screen_size))
+        logger.info('Click filter screen_size %s', screen_size)
 
     def click_filter_confirm(self):
         self.driver.execute_script('arguments[0].click();', self.get_filter_confirm())

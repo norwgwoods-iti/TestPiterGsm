@@ -17,4 +17,7 @@ def setup_logging(log_dir: Path) -> Path:
     root_logger = logging.getLogger()
     root_logger.addHandler(file_handler)
 
+    logging.getLogger('urllib3').setLevel(logging.WARNING)
+    logging.getLogger('selenium').setLevel(logging.WARNING)
+
     return log_file

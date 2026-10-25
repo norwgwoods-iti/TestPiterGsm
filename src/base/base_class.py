@@ -32,14 +32,14 @@ class Base:
         return f'current URL: {get_url}'
 
 
-    """ Method get arguments NOT empty """
-    @staticmethod
-    def get_arguments_non_empty(arguments):
-        non_empty_args = [
-            value for key, value in arguments.items()
-            if key != 'self' and value is not None
-        ]
-        return non_empty_args
+    # """ Method get arguments NOT empty """
+    # @staticmethod
+    # def get_arguments_non_empty(arguments):
+    #     non_empty_args = [
+    #         value for key, value in arguments.items()
+    #         if key != 'self' and value is not None
+    #     ]
+    #     return non_empty_args
 
 
     # Title page methods
@@ -51,22 +51,49 @@ class Base:
 
 
     """ Method Get Titles Product """
-    def get_product_titles(self, product_titles_list_xpath):
+    def get_product_title(self, product_title_xpath: str):
         time.sleep(1)
-        product_titles = self.wait.until(ec.visibility_of_all_elements_located((By.XPATH, product_titles_list_xpath)))
-        titles = []
-        for title in product_titles:
-            titles.append(title.text)
-        return titles
+        product_title = self.wait.until(ec.visibility_of_element_located((By.XPATH, product_title_xpath)))
+        return product_title.text
+    #
+    # """ Method Get Titles Product """
+    # def get_product_titles(self, product_title_xpath):
+    #     time.sleep(1)
+    #     product_titles = self.wait.until(ec.visibility_of_all_elements_located((By.XPATH, product_title_xpath)))
+    #     titles = []
+    #     if isinstance(product_titles, list):
+    #         for title in product_titles:
+    #             titles.append(title.text)
+    #         return titles
+    #     else:
+    #         return product_titles.text
 
 
     @staticmethod
-    def assertion_products_title(key_word: str | list, product_titles_list: str | list):
-        titles = product_titles_list
-        assert len(titles) > 0
-        for key in key_word:
-            assert any(key.lower() in title.lower() for title in titles)
+    def assertion_products_title(key_word:str | list, product_title: str):
+        assert len(product_title) > 0, 'Заголовк товара отсутствует'
+
+        if isinstance(key_word, str):
+            key_word = [key_word]
+
+        assert any(word.lower() in product_title.lower() for word in key_word)
+
         logger.info('Success assertion_products_title')
+    #
+    # @staticmethod
+    # def assertion_products_title(key_word: float | str | list, product_title: str | list):
+    #     titles = product_title
+    #     assert len(titles) > 0
+    #     if isinstance(key_word, list):
+    #         for key in key_word:
+    #             if key:
+    #                 assert any(key.lower() in title.lower() for title in titles)
+    #     elif isinstance(key_word, str):
+    #         assert any(key_word.lower() in title.lower() for title in titles)
+    #     elif isinstance(key_word, float):
+    #         assert any(key_word in title.lower() for title in titles)
+    #
+    #     logger.info('Success assertion_products_title')
 
 
     """ Method assert price """
@@ -128,7 +155,7 @@ class Base:
     def click_filter_button_if_visible(self):
         if self.is_show_filter_button_visible():
             self.driver.execute_script('arguments[0].click();', self.get_filter_button())
-            logger.info('Filter button success')
+            logger.info('Click Filter button')
 
 
 
