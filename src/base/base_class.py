@@ -99,6 +99,7 @@ class Base:
         self.driver.save_screenshot(f'{current_dir}/{screenshot_name}')
         logger.info('Screenshot success')
 
+
     """ Method is visible element """
     def is_element_visible(self, locator, name_element):
         try:

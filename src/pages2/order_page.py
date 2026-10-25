@@ -48,7 +48,7 @@ class OrderPage(Base):
         if self.is_element_visible(today_button_xpath, 'Today delivery button'):
             return today_button_xpath
 
-        if self.is_element_visible(tomorrow_button_xpath, 'Tomorrow delivery button'):
+        elif self.is_element_visible(tomorrow_button_xpath, 'Tomorrow delivery button'):
             return tomorrow_button_xpath
 
         raise AssertionError(
