@@ -20,12 +20,15 @@ class TestMain:
     @pytest.mark.parametrize(
         'catalog, memory_size, color', IPHONE_TEST_DATA,
     )
-    def test_buy_product(self, driver, catalog:str, memory_size:str, color:str):
+    def test_buy_product(self, driver, catalog:str, memory_size:str, color:str, caplog):
         logger.info(f'Test Buy "{catalog}"')
+        caplog.set_level(logging.INFO)
 
         main_page = MainPage(driver)
         main_page.open_url()
         main_page.select_menu_catalog('iPhone')
+
+        assert 'Start Open main page' in caplog.text
 
         iphone_page = IphonePage(driver)
         iphone_page.select_product_in_menu_catalog(catalog=catalog)
