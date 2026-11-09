@@ -15,6 +15,9 @@ logs/*
 !logs/.gitkeep
 .idea
 
+.DS_Store
+src/.DS_Store
+
 allure_results/*
 !allure_results/.gitkeep
 11.py
