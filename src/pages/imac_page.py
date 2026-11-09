@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 from src.base.base_class import Base
 from src.pages.mac_page import MacPage
-from src.utilities.logger import Logger
+# from src.utilities.logger import Logger
 
 
 class IMacPage(Base):
@@ -159,7 +159,7 @@ class IMacPage(Base):
             self.click_filter_confirm()
             """ Check """
 
-            self.assertion_products_title(key_word=memory.replace('GB', ''), product_titles_list=self.product_titles_xpath)
+            self.assertion_products_title(key_word=memory.replace('GB', ''), product_title=self.product_titles_xpath)
 
             Logger.add_end_method(current_url=self.get_current_url(), method='filter_imac_by_memory')
 

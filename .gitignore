@@ -17,3 +17,5 @@ logs/*
 
 allure_results/*
 !allure_results/.gitkeep
+11.py
+hhh.py
